@@ -1,0 +1,109 @@
+.parent {
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+
+    background:var(--background-secondary);
+
+    width:50vw;
+    height:45vh;
+    padding-top:5vh;
+
+    margin:0;
+
+    border-style:solid;
+    border-width:2px;
+    border-color:var(--primary);
+
+    transition-duration:0.5s;
+}
+
+.parent > h1 {
+    color:var(--primary);
+
+    font-size:45px;
+}
+
+.login {
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+
+    font-family: 'Nunito', sans-serif;
+
+    height:25ch;
+
+    color:var(--primary);
+}
+
+.login #fields {
+    display:grid;
+    grid-template-columns: auto auto;
+    row-gap: 1ch;
+
+    margin-bottom:1ch;
+}
+
+.login #fields > h2 {
+    justify-self: end;
+
+    font-family: 'Nunito', sans-serif;
+    font-weight:100;
+
+    padding-right:0.5em;
+}
+
+.login > a {
+    color:var(--background-tertiary);
+    font-style:italic;
+
+    transition-duration:0.3s;
+}
+
+.login > #signup:hover {
+    text-shadow: 0px 0px 5px var(--background-tertiary);
+    transform:translateX(5%);
+}
+
+.login > #login:hover {
+    text-shadow: 0px 0px 5px var(--background-tertiary);
+    transform:translateX(-5%);
+}
+
+.login #submit {
+    padding:5px 10px 5px 10px;
+    cursor:pointer;
+
+    border-width: 0;
+    border-radius:20px;
+
+    font-family: 'Nunito', sans-serif;
+    font-size:20px;
+    font-weight: 500;
+
+    background-color:var(--background-tertiary);
+    color:var(--primary);
+
+    transition-duration:0.3s;
+}
+
+.login #submit:hover {
+    transform:translateY(-10%);
+}
+
+.parent.signup {
+    height:55vh !important;
+    padding-top:2vh;
+}
+
+.parent.signup .login {
+    height:35ch;
+}
+
+.parent #status {
+    color:red;
+    font-style: italic;
+    font-weight: 100;
+}
