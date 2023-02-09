@@ -1,0 +1,30 @@
+.parent {
+    position: absolute;
+
+    top:50vh;
+    left:50vw;
+
+    width:45vw;
+    height:50vh;
+
+    transform:translate(-50%, -50%);
+
+    background:red;
+}
+
+.parent #fields {
+    background:blue;
+
+    display:flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    flex-direction:column;
+}
+
+.parent #fields input {
+    height:50px;
+    width:300px;
+
+    margin:10px;
+}
