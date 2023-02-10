@@ -8,8 +8,6 @@
         <link rel="stylesheet" href="./styles/homepage.css">
         <?php
 
-        echo $_COOKIE["user_id"];
-
         if (isset($_COOKIE["login_new"]) && ($_COOKIE["login_new"] <= 0)) {
             setcookie("login_new", 1, time() + (86400 * 14), "/"); // after alert, increment so it doesnt alert again
             echo "<script>alert(\"Successfully logged in as {$_COOKIE["login_username"]}.\")</script>";
