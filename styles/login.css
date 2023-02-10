@@ -32,6 +32,7 @@
     flex-direction: column;
 
     font-family: 'Nunito', sans-serif;
+    /* font-family: monospace; */
 
     height:25ch;
 
@@ -44,7 +45,75 @@
     row-gap: 1ch;
 
     margin-bottom:1ch;
+
+    justify-content: center;
+    align-items: center;
 }
+
+.login #fields input {
+    height:2.5ch;
+    width:15em;
+}
+
+/* #region Password criteria */
+.login #password_criteria {
+    position:relative;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login #password_criteria > div {
+    background:var(--background-primary);
+    display:grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    align-items: center;
+
+    overflow: hidden;
+
+    position: absolute;
+
+    top:100%;
+    height:0px;
+    width:22em;
+
+    padding:0;
+
+    border-radius:1ch;
+
+    transition-duration:0.3s;
+
+    /* border-style:solid;
+    border-color:var(--primary);
+    border-width:1px; */
+
+    filter:drop-shadow(0px 10px 10px #0005);
+}
+
+.login #password_criteria > div > img {
+    height:2ch;
+    padding:0.2ch 1em 0.2ch 0;
+}
+
+.login #password_criteria input:focus + div {
+    height:20ch;
+
+    padding:1ch 1em;
+}
+
+.login #password_criteria > div > h3 {
+    /* font-family: monospace; */
+    font-weight: 200;
+    font-size:16px;
+
+    margin:0;
+    padding:0;
+
+    width:fit-content;
+}
+/* #endregion */
 
 .login #fields > h2 {
     justify-self: end;
@@ -97,7 +166,7 @@
 
 .parent.signup {
     height:55vh !important;
-    padding-top:2vh;
+    padding-top:5vh;
 }
 
 .parent.signup .login {

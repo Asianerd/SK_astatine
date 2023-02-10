@@ -11,9 +11,19 @@ var regexTable = {
     "Password must have at least one lowercase letter":["password",/(?=.*[a-z])/],          // checks a-z
     "Password must have at least one number":["password",/(?=.*[0-9])/],                    // checks 0-9
     "Password must have at least one special character":["password",/(?=.*[-+_!@#$%^&*.,?])/],  // checks if has one of these: -+_!@#$%^&*.,?
-    "Password must be between 8 to 32 characters long.":["password", /^[\s\S]{8,32}$/],
-    "Password must not include spaces.":["password", /[\S]{0,}/]                            // checks whitespace characters, amount greater than 0
+    "Password must be between 4 to 8 characters long.":["password", /^[\s\S]{4,8}$/],
+    "Password must not include spaces.":["password", /(?=.*\s)/]                            // checks whitespace characters, amount greater than 0
 };
+
+var passwordCriterias = document.querySelectorAll("#password_criteria > div > img");
+var passwordRegex = [
+    /^[\s\S]{4,8}$/,
+    /(?=.*[A-Z])/,
+    /(?=.*[a-z])/,
+    /(?=.*[0-9])/,
+    /(?=.*[-+_!@#$%^&*.,?])/,
+    /(?=.*\s)/
+];
 
 [...document.getElementsByClassName("signup_inputField")].forEach(function (value, i) {
     // adding DOM objects to inputFields dict
@@ -25,9 +35,18 @@ var regexTable = {
     ][i]] = value;
 });
 
-function onFormChange() {
-
+function onPasswordUpdate() {
+    console.log("form changed");
+    passwordRegex.forEach(function(value, index) {
+        passwordCriterias[index].src = `./assets/logos/${
+            (index == 5 ?
+                !!value.test(inputFields["password"].value) :
+                !value.test(inputFields["password"].value)) ? "cross" : "check"
+        }.png`
+    })
 }
+
+onPasswordUpdate();
 
 function validateForm() {
     // ran on form submit
@@ -66,7 +85,9 @@ function validateForm() {
     for(let [key, value] of Object.entries(regexTable)) {
         // if (regex .test( text in inputField ))
         //      statusText.innerHTML = error text
-        if (!value[1].test(inputData[value[0]])) {
+        if ((key == "Password must not include spaces.") ^ (!value[1].test(inputData[value[0]]))) {
+            // XOR operator
+            // if key == "Password must not include spaces.", then inverts the next condition
             statusText.innerHTML = key;
             return false;
         }
