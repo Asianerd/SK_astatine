@@ -13,72 +13,107 @@
             echo "<script>alert(\"Successfully logged in as {$_COOKIE["login_username"]}.\")</script>";
         }
 
-        $numberFormatter = new \NumberFormatter(
-            'en_US',
-            \NumberFormatter::PADDING_POSITION
-        );
-
-        $currencyFormatter = new \NumberFormatter(
-            'en_US',
-            \NumberFormatter::CURRENCY
-        );
-
-        function formatHZ($hz) {
-            return number_format($hz, 1); // makes string interpolation easier
-        }
-
         require __DIR__ . '/client/CPU.php'; // import cpu class
 
         Item::initialize();
+        // initialized twice, once here and another in fetch_cpu but thats fine
 
         ?>
     </head>
     <body>
         <div id="prefab_header"></div>
         <!-- <img src="/assets/outrun.gif" id="background-image"> -->
-        <div id="prefab_item_filter"></div>
-        <div>
-            <div style="height:10vh"></div>
-            <div class="item-container" style="width:90%; margin-top:2cm;">
-                <?php
-foreach(Item::$collection as $i) {
-echo "<div class='entity'>
-    <div id='showcase-image'>
-        <img src='./assets/sample-images/i9.png'>
-    </div>
-    <div id='info-section'>
-        <div id='header'>
-            <div id='cores'>
-                <h1>{$i->cores}</h1>
-                <img src='./assets/logos/core.png'>
-                <hr>
-            </div>
-            <h1>{$i->name}</h1>
-        </div>
-        <hr>
-        <div id='info'>
-            <div id='data'>
-                <h1>{$currencyFormatter->formatCurrency($i->price, 'MYR')}</h1>
-                <div>
-                    <img src='./assets/logos/eye.png'>
-                    <h1>{$numberFormatter->format($i->interaction_count)} views</h1>
+        <!-- <div id="prefab_item_filter"></div> -->
+        <div id="content-parent">
+            <div class="item-filter">
+                <div id="input">
+                    <div id="title">
+                        <h1>Cores</h1>
+                        <h2 class="slider-text">0Hz - 2.4Hz</h2>
+                    </div>
+                    <div class="slider-range" id="core">
+                        <input type="range"
+                            value="<?php echo Item::$slider_ranges["cores-start"];?>"
+                            min="<?php echo Item::$slider_ranges["cores-start"];?>"
+                            max="<?php echo Item::$slider_ranges["cores-end"];?>"
+                            step="1">
+                        <input type="range"
+                            value="<?php echo Item::$slider_ranges["cores-end"];?>"
+                            min="<?php echo Item::$slider_ranges["cores-start"];?>"
+                            max="<?php echo Item::$slider_ranges["cores-end"];?>"
+                            step="1">
+                    </div>
+                </div>
+                <div id="input">
+                    <div id="title">
+                        <h1>Frequency</h1>
+                        <h2 class="slider-text">0Hz - 2.4Hz</h2>
+                    </div>
+                    <div class="slider-range" id="frequency">
+                        <input type="range"
+                            value="<?php echo Item::$slider_ranges["frequency-start"];?>"
+                            min="<?php echo Item::$slider_ranges["frequency-start"];?>"
+                            max="<?php echo Item::$slider_ranges["frequency-end"];?>"
+                            step="0.1">
+                        <input type="range"
+                            value="<?php echo Item::$slider_ranges["frequency-end"];?>"
+                            min="<?php echo Item::$slider_ranges["frequency-start"];?>"
+                            max="<?php echo Item::$slider_ranges["frequency-end"];?>"
+                            step="0.1">
+                    </div>
+                </div>
+                <div id="input">
+                    <div id="title">
+                        <h1>Price</h1>
+                        <h2 class="slider-text">0Hz - 2.4Hz</h2>
+                    </div>
+                    <div class="slider-range" id="price">
+                    <input type="range"
+                            value="<?php echo Item::$slider_ranges["price-start"];?>"
+                            min="<?php echo Item::$slider_ranges["price-start"];?>"
+                            max="<?php echo Item::$slider_ranges["price-end"];?>"
+                            step="0.01">
+                        <input type="range"
+                            value="<?php echo Item::$slider_ranges["price-end"];?>"
+                            min="<?php echo Item::$slider_ranges["price-start"];?>"
+                            max="<?php echo Item::$slider_ranges["price-end"];?>"
+                            step="0.01">
+                    </div>
+                </div>
+                <div id="sorting">
+                    <h1>
+                        Sort by :
+                    </h1>
+                    <div id="sort-options">
+                        <div id="sort-types">
+                            <input type="radio" name="sort-option" id="sort-options-core" value="1">
+                            <label for="sort-options-core">
+                                <h3>Cores</h3>
+                            </label>
+                            <input type="radio" name="sort-option" id="sort-options-frequency" value="2">
+                            <label for="sort-options-frequency">
+                                <h3>Frequency</h3>
+                            </label>
+                            <input type="radio" name="sort-option" id="sort-options-price" value="3">
+                            <label for="sort-options-price">
+                                <h3>Price</h3>
+                            </label>
+                        </div>
+                        <div id="sort-direction" onclick="sortDirectionClick();">
+                            <img src="./assets/logos/up_chevron.png">
+                            <h3>
+                                Ascending
+                            </h3>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div id='hz'>
-                <div>
-                    <h1>".number_format($i->frequency, 1)."</h1>
-                    <img src='./assets/logos/dash.png'>
-                    <h1>".number_format($i->boosted_frequency, 1)."GHz</h1>
-                </div>
+            <div class="item-container" style="width:60%;">
+                <!-- all cpu entities are here -->
             </div>
         </div>
-    </div>
-</div>";
-}
-                ?>
-            </div>
-        </div>
-        <div style="height:200vh;"></div>
+        <div style="height:50vh;"></div>
         <script src="./scripts/main_script.js"></script>
+        <script src="./scripts/homepage.js"></script>
     </body>
 </html>

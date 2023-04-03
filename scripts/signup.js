@@ -100,8 +100,3 @@ function validateForm() {
 
     return true;
 }
-
-/*
-!Testuser1
-
- */

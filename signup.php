@@ -1,5 +1,6 @@
 <?php
 
+// declares signup states
 enum signupStatus {
     case Unset;
     case Success;
@@ -7,16 +8,20 @@ enum signupStatus {
     case UsernameOccupied;
 }
 
+// sets to unset first
 $status = signupStatus::Unset;
 
 if (isset($_POST["signup_name"]) &&
     isset($_POST["signup_username"]) &&
     isset($_POST["signup_password"]) &&
     isset($_POST["signup_confirm_password"])) {
-    $user_db = new mysqli($hostname='localhost', $username='astatine', $password='temp', $database='astatine_data');
-    $result = $user_db->query("SELECT * FROM `user` WHERE username = '{$_POST["signup_username"]}'");
+    // if name, username, password and confirm password arent null
+    $user_db = new mysqli($hostname='localhost', $username='astatine', $password='temp', $database='astatine_data'); // login to database
+    $result = $user_db->query("SELECT * FROM `user` WHERE username = '{$_POST["signup_username"]}'"); // querys data
 
     if ($result->num_rows >= 1) {
+        // if more than one record exists
+        // dont let them sign up, the username is already taken
         $status = signupStatus::UsernameOccupied;
     } else {
         /* finds new user id
@@ -49,11 +54,12 @@ if (isset($_POST["signup_name"]) &&
          */
         $current_user_id = 0;
         $found = false;
-        foreach ($user_db->query("SELECT user_id FROM `user`") as $rows) {
-            $current = (int)$rows["user_id"];
-            $current_user_id++;
+        foreach ($user_db->query("SELECT user_id FROM `user`") as $rows) { // queries all users
+            $current = (int)$rows["user_id"]; // $current = user's id
+            $current_user_id++; // increments $current_user_id
 
             if ($current != $current_user_id) {
+                // refer to the algorithm above
                 $found = true;
                 break;
             }
@@ -62,13 +68,15 @@ if (isset($_POST["signup_name"]) &&
             $current_user_id++;
         }
 
-        $user_db->query("INSERT INTO `user` (user_id, name, username, password)
-            VALUES ({$current_user_id}, \"{$_POST["signup_name"]}\", \"{$_POST["signup_username"]}\", \"{$_POST["signup_password"]}\")");
+        // adds new user into database
+        $user_db->query("INSERT INTO `user` (user_id, name, username, password, admin)
+            VALUES ({$current_user_id}, \"{$_POST["signup_name"]}\", \"{$_POST["signup_username"]}\", \"{$_POST["signup_password"]}\", 0)");
         $status = signupStatus::Success;
     }
 }
 
 if ($status == signupStatus::Success) {
+    // sets cookies with 1 day expiry
     setcookie("login_new", 0, time() + (86400 * 14), "/"); // index.php displays alert box if this is 0
     setcookie("login_username", $_POST["signup_username"], time() + (86400 * 14), "/");
     setcookie("user_id", $current_user_id, time() + (86400 * 14), "/");

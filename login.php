@@ -1,5 +1,6 @@
 <?php
 
+// declaring login statuses
 enum loginStatus {
     case Unset;
     case Success;
@@ -8,12 +9,15 @@ enum loginStatus {
     case FieldNotSet;
 }
 
+// set to unset first
 $status = loginStatus::Unset;
 
 if (isset($_POST["login_username"]) && isset($_POST["login_password"])) {
-    $user_db = new mysqli($hostname='localhost', $username='astatine', $password='temp', $database='astatine_data');
-    $result = $user_db->query("SELECT * FROM `user` WHERE username = '{$_POST["login_username"]}'");
+    // if username and password arent null
+    $user_db = new mysqli($hostname='localhost', $username='astatine', $password='temp', $database='astatine_data'); // login to database
+    $result = $user_db->query("SELECT * FROM `user` WHERE username = '{$_POST["login_username"]}'"); // query data
     if ($result->num_rows >= 1) {
+        // if more than one record exists
         foreach ($result as $x) {
             $user = $x;
             break;
@@ -21,15 +25,17 @@ if (isset($_POST["login_username"]) && isset($_POST["login_password"])) {
         }
         $status = $user['password'] == $_POST["login_password"] ? loginStatus::Success : loginStatus::IncorrectPassword;
     } else {
+        // no record exists
         $status = loginStatus::UsernameNotFound;
     }
 }
 
 if ($status == loginStatus::Success) {
+    // sets cookies with 1 day expiry
     setcookie("login_new", 0, time() + (86400 * 14), "/"); // index.php displays alert box if this is 0
     setcookie("login_username", $user['username'], time() + (86400 * 14), "/");
     setcookie("user_id", $user['user_id'], time() + (86400 * 14), "/");
-    header("Location: ./index.php");
+    header("Location: ./index.php"); // redirects to index.php
     exit();
 }
 
