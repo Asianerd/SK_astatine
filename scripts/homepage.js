@@ -45,9 +45,10 @@ function updateSliderText() {
 }
 
 function updateEntityList() {
-    var http = new XMLHttpRequest();
+    var http = new XMLHttpRequest(); // create new http request
     http.onreadystatechange = function() {
         if ((this.readyState == 4) && (this.status == 200)) {
+            // if there isnt any error from http, set the container innerhtml
             itemContainer.innerHTML = this.response;
         }
     }
@@ -55,6 +56,7 @@ function updateEntityList() {
     var args = "";
 
     for (const [key, value] of Object.entries(sliderData)) {
+        // go through all the data entries and add to the arguments
         args += `&${key}-high=${value[1]}`;
         args += `&${key}-low=${value[0]}`;
     }
@@ -64,6 +66,7 @@ function updateEntityList() {
 
     http.open("GET", `../server/fetch_cpu.php?${args}`, true);
     http.send();
+    // send it to the fetch_cpu.php file
 }
 
 window.onload = function(){
@@ -81,13 +84,14 @@ window.onload = function(){
     fullyInitialized = true;
     updateSliderText();
     updateEntityList();
+    // update entity list
 }
 
 function sortDirectionClick() {
     sortDirection = !sortDirection;
 
     sortDirectionImg.id = sortDirection ? "ascending" : "descending";
-    sortDirectionText.innerHTML = sortDirection ? "Ascending" : "Descending";
+    sortDirectionText.innerHTML = sortDirection ? "Menaik" : "Menurun";
 
     updateEntityList();
 }
@@ -96,12 +100,15 @@ sortItems.forEach(element => {
     element.addEventListener('click', function() {
         sortItems.forEach(element => {
             element.checked = false;
+            // set all the elements to unchecked
         })
 
         if (sortItemValue != element.value) {
+            // if the current item value isnt the same, set to true
             element.checked = true;
             sortItemValue = element.value;
         } else {
+            // else unselect all
             sortItemValue = 0;
         }
 
