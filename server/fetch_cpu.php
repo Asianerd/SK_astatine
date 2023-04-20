@@ -90,8 +90,8 @@ $final = $final . "<div class='entity'>
             <div id='data'>
                 <h1>{$currencyFormatter->formatCurrency($i->price, 'MYR')}</h1>
                 <div>
+                    <h1>{$numberFormatter->format($i->interaction_count)}</h1>
                     <img src='./assets/logos/eye.png'>
-                    <h1>{$numberFormatter->format($i->interaction_count)} views</h1>
                 </div>
             </div>
             <div id='hz'>
