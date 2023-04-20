@@ -16,8 +16,8 @@ if (isset($_POST["signup_name"]) &&
     isset($_POST["signup_password"]) &&
     isset($_POST["signup_confirm_password"])) {
     // if name, username, password and confirm password arent null
-    $user_db = new mysqli($hostname='localhost', $username='astatine', $password='temp', $database='astatine_data'); // login to database
-    $result = $user_db->query("SELECT * FROM `user` WHERE username = '{$_POST["signup_username"]}'"); // querys data
+    $user_db = new mysqli($hostname='localhost', $username='astatine', $password='password', $database='astatine_data'); // login to database
+    $result = $user_db->query("SELECT * FROM `pelanggan` WHERE username = '{$_POST["signup_username"]}'"); // querys data
 
     if ($result->num_rows >= 1) {
         // if more than one record exists
@@ -54,7 +54,7 @@ if (isset($_POST["signup_name"]) &&
          */
         $current_user_id = 0;
         $found = false;
-        foreach ($user_db->query("SELECT user_id FROM `user`") as $rows) { // queries all users
+        foreach ($user_db->query("SELECT user_id FROM `pelanggan`") as $rows) { // queries all users
             $current = (int)$rows["user_id"]; // $current = user's id
             $current_user_id++; // increments $current_user_id
 
@@ -69,7 +69,7 @@ if (isset($_POST["signup_name"]) &&
         }
 
         // adds new user into database
-        $user_db->query("INSERT INTO `user` (user_id, name, username, password, admin)
+        $user_db->query("INSERT INTO `pelanggan` (user_id, nama, username, kata_laluan, admin)
             VALUES ({$current_user_id}, \"{$_POST["signup_name"]}\", \"{$_POST["signup_username"]}\", \"{$_POST["signup_password"]}\", 0)");
         $status = signupStatus::Success;
     }

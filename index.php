@@ -28,7 +28,7 @@
             <div class="item-filter">
                 <div id="input">
                     <div id="title">
-                        <h1>Cores</h1>
+                        <h1>Teras</h1>
                         <h2 class="slider-text">0Hz - 2.4Hz</h2>
                     </div>
                     <div class="slider-range" id="core">
@@ -46,7 +46,7 @@
                 </div>
                 <div id="input">
                     <div id="title">
-                        <h1>Frequency</h1>
+                        <h1>Frekuensi</h1>
                         <h2 class="slider-text">0Hz - 2.4Hz</h2>
                     </div>
                     <div class="slider-range" id="frequency">
@@ -64,7 +64,7 @@
                 </div>
                 <div id="input">
                     <div id="title">
-                        <h1>Price</h1>
+                        <h1>Harga</h1>
                         <h2 class="slider-text">0Hz - 2.4Hz</h2>
                     </div>
                     <div class="slider-range" id="price">
@@ -88,21 +88,21 @@
                         <div id="sort-types">
                             <input type="radio" name="sort-option" id="sort-options-core" value="1">
                             <label for="sort-options-core">
-                                <h3>Cores</h3>
+                                <h3>Teras</h3>
                             </label>
                             <input type="radio" name="sort-option" id="sort-options-frequency" value="2">
                             <label for="sort-options-frequency">
-                                <h3>Frequency</h3>
+                                <h3>Frekuensi</h3>
                             </label>
                             <input type="radio" name="sort-option" id="sort-options-price" value="3">
                             <label for="sort-options-price">
-                                <h3>Price</h3>
+                                <h3>Harga</h3>
                             </label>
                         </div>
                         <div id="sort-direction" onclick="sortDirectionClick();">
                             <img src="./assets/logos/up_chevron.png">
                             <h3>
-                                Ascending
+                                Menaik
                             </h3>
                         </div>
                     </div>

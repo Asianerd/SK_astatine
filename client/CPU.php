@@ -11,15 +11,14 @@ class Item {
         Item::$slider_ranges = [];
         Item::$data_ranges = [
             // for the start and end of the slider range
-            "cores" => [2^32, 0],
-            "frequency" => [2^32, 0.0],
-            "boosted_frequency" => [2^32, 0.0],
-            "price" => [2^32, 0]
+            "cores" => [PHP_INT_MAX, 0],
+            "frequency" => [PHP_INT_MAX, 0.0],
+            "boosted_frequency" => [PHP_INT_MAX, 0.0],
+            "price" => [PHP_INT_MAX, 0]
         ];
-        
 
         // connect to database
-        $db = new mysqli($hostname='localhost', $username='astatine', $password='temp', $database='astatine_data');
+        $db = new mysqli($hostname='localhost', $username='astatine', $password='password', $database='astatine_data');
         
         // loop through every cpu in database
         foreach($db->query('SELECT * FROM `cpu`') as $row) {
@@ -29,6 +28,8 @@ class Item {
 
         foreach(Item::$collection as $cpu) {
             // loop through every cpu
+            // var_dump($cpu);
+            // echo "\n\n";
             foreach (array_keys(Item::$data_ranges) as $key) {
                 // loops through each key in associative array
                 // reads first element (start)
@@ -38,7 +39,7 @@ class Item {
                 // reads last element (end)
                 if (Item::$data_ranges[$key][array_key_last(Item::$data_ranges[$key])] < $cpu->$key) { // current cpu's data is higher
                     Item::$data_ranges[$key][array_key_last(Item::$data_ranges[$key])] = $cpu->$key; // set as new highest value
-                }    
+                }
             }
         }
 
@@ -79,25 +80,25 @@ class Item {
     public $id, $name, $price, $interaction_count, $cores, $frequency, $boosted_frequency;
 
     public function __construct($id, $name, $price, $interaction_count, $cores, $frequency, $boosted_frequency) {
-        $this->id = $id;
+        $this->id = (int)$id;
         $this->name = $name;
-        $this->price = $price;
-        $this->interaction_count = $interaction_count;
-        $this->cores = $cores;
-        $this->frequency = $frequency;
-        $this->boosted_frequency = $boosted_frequency;
+        $this->price = (float)$price;
+        $this->interaction_count = (int)$interaction_count;
+        $this->cores = (int)$cores;
+        $this->frequency = (float)$frequency;
+        $this->boosted_frequency = (float)$boosted_frequency;
     }
 
     public static function from_dict($x) {
         // for convenience
         return new Item(
-            $x['cpu_id'],
-            $x['name'],
-            $x['price'],
-            $x['interaction_count'],
-            $x['cores'],
-            $x['frequency'],
-            $x['boosted_frequency']
+            $x['id_CPU'],
+            $x['nama'],
+            $x['harga'],
+            $x['bilangan_interaksi'],
+            $x['nombor_teras'],
+            $x['frekuensi'],
+            $x['frekuensi_tertinggi']
         );
     }
     // #endregion

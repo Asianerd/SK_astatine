@@ -14,8 +14,8 @@ $status = loginStatus::Unset;
 
 if (isset($_POST["login_username"]) && isset($_POST["login_password"])) {
     // if username and password arent null
-    $user_db = new mysqli($hostname='localhost', $username='astatine', $password='temp', $database='astatine_data'); // login to database
-    $result = $user_db->query("SELECT * FROM `user` WHERE username = '{$_POST["login_username"]}'"); // query data
+    $user_db = new mysqli($hostname='localhost', $username='astatine', $password='password', $database='astatine_data'); // login to database
+    $result = $user_db->query("SELECT * FROM `pelanggan` WHERE username = '{$_POST["login_username"]}'"); // query data
     if ($result->num_rows >= 1) {
         // if more than one record exists
         foreach ($result as $x) {
@@ -23,7 +23,7 @@ if (isset($_POST["login_username"]) && isset($_POST["login_password"])) {
             break;
             // yea, dumb, but faster way to fetch first element
         }
-        $status = $user['password'] == $_POST["login_password"] ? loginStatus::Success : loginStatus::IncorrectPassword;
+        $status = $user['kata_laluan'] == $_POST["login_password"] ? loginStatus::Success : loginStatus::IncorrectPassword;
     } else {
         // no record exists
         $status = loginStatus::UsernameNotFound;
