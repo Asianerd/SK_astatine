@@ -1,18 +1,31 @@
 var inputFields = {};
 var inputData = {};
 var statusText = document.getElementById("status");
+// var regexTable = {
+//     "Name must be between 8 to 32 characters long.":["name", /^[\s\S]{8,32}$/], // all whitespace and non-whitespace characters, amount between 8-32
+
+//     "Username must be between 8 to 32 characters long.":["username", /^[\s\S]{8,32}$/],
+//     "Username must not have spaces or special characters. (!,@,#,$,%,^,etc)":["username", /^[a-zA-Z0-9_\.]+$/], // checks a-z, A-Z, 0-9, _ and .
+
+//     "Password must have at least one uppercase letter":["password",/(?=.*[A-Z])/],          // checks A-Z
+//     "Password must have at least one lowercase letter":["password",/(?=.*[a-z])/],          // checks a-z
+//     "Password must have at least one number":["password",/(?=.*[0-9])/],                    // checks 0-9
+//     "Password must have at least one special character":["password",/(?=.*[-+_!@#$%^&*.,?])/],  // checks if has one of these: -+_!@#$%^&*.,?
+//     "Password must be between 4 to 8 characters long.":["password", /^[\s\S]{4,8}$/],
+//     "Password must not include spaces.":["password", /(?=.*\s)/]                            // checks whitespace characters, amount greater than 0
+// };
 var regexTable = {
-    "Name must be between 8 to 32 characters long.":["name", /^[\s\S]{8,32}$/], // all whitespace and non-whitespace characters, amount between 8-32
+    "Nama perlu antara 8 hingga 32 aksara panjang.":["name", /^[\s\S]{8,32}$/], // all whitespace and non-whitespace characters, amount between 8-32
 
-    "Username must be between 8 to 32 characters long.":["username", /^[\s\S]{8,32}$/],
-    "Username must not have spaces or special characters. (!,@,#,$,%,^,etc)":["username", /^[a-zA-Z0-9_\.]+$/], // checks a-z, A-Z, 0-9, _ and .
+    "Username perlu antara 8 hingga 32 aksara panjang.":["username", /^[\s\S]{8,32}$/],
+    "Username tidak boleh mempunyai jarak aksara atau aksara unik. (!,@,#,$,%,^,etc)":["username", /^[a-zA-Z0-9_\.]+$/], // checks a-z, A-Z, 0-9, _ and .
 
-    "Password must have at least one uppercase letter":["password",/(?=.*[A-Z])/],          // checks A-Z
-    "Password must have at least one lowercase letter":["password",/(?=.*[a-z])/],          // checks a-z
-    "Password must have at least one number":["password",/(?=.*[0-9])/],                    // checks 0-9
-    "Password must have at least one special character":["password",/(?=.*[-+_!@#$%^&*.,?])/],  // checks if has one of these: -+_!@#$%^&*.,?
-    "Password must be between 4 to 8 characters long.":["password", /^[\s\S]{4,8}$/],
-    "Password must not include spaces.":["password", /(?=.*\s)/]                            // checks whitespace characters, amount greater than 0
+    "Kata laluan perlu mempunyai sekurang-kurangnya satu huruf besar.":["password",/(?=.*[A-Z])/],          // checks A-Z
+    "Kata laluan perlu mempunyai sekurang-kurangnya satu huruf kecil.":["password",/(?=.*[a-z])/],          // checks a-z
+    "Kata laluan perlu mempunyai sekurang-kurangnya satu nombor.":["password",/(?=.*[0-9])/],                    // checks 0-9
+    "Kata laluan perlu mempunyai sekurang-kurangnya satu tanda baca.":["password",/(?=.*[-+_!@#$%^&*.,?])/],  // checks if has one of these: -+_!@#$%^&*.,?
+    "Kata laluan perlu antara 4 hingga 8 aksara panjang.":["password", /^[\s\S]{4,8}$/],
+    "Kata laluan tidak boleh mempunyai jarak aksara.":["password", /(?=.*\s)/]                            // checks whitespace characters, amount greater than 0
 };
 
 var passwordCriterias = document.querySelectorAll("#password_criteria > div > img");
@@ -85,7 +98,8 @@ function validateForm() {
     for(let [key, value] of Object.entries(regexTable)) {
         // if (regex .test( text in inputField ))
         //      statusText.innerHTML = error text
-        if ((key == "Password must not include spaces.") ^ (!value[1].test(inputData[value[0]]))) {
+        //if ((key == "Password must not include spaces.") ^ (!value[1].test(inputData[value[0]]))) {
+        if ((key == "Kata laluan tidak boleh mempunyai jarak aksara.") ^ (!value[1].test(inputData[value[0]]))) {
             // XOR operator
             // if key == "Password must not include spaces.", then inverts the next condition
             statusText.innerHTML = key;
@@ -94,7 +108,7 @@ function validateForm() {
     }
 
     if (inputData["password"] != inputData["confirm_password"]) {
-        statusText.innerHTML = "Passwords must be the same."
+        statusText.innerHTML = "Kata laluan mesti sama."
         return false;
     }
 

@@ -103,40 +103,40 @@ if ($status == signupStatus::Success) {
                 <h2 id="status">
                     <?php
                     if ($status == signupStatus::UsernameOccupied) {
-                        echo "The username \"{$_POST['signup_username']}\" is already taken.";
+                        echo "Username \"{$_POST['signup_username']}\" sudah wujud.";
                     }
                     ?>
                 </h2>
                 <form class="login" action="signup.php" method="POST" autocomplete="on" onsubmit="return validateForm();">
                     <div id="fields">
-                        <h2>Name : </h2>
+                        <h2>Nama : </h2>
                         <input class="signup_inputField" id="signup_name" type="text" name="signup_name">
                         <h2>Username : </h2>
                         <input class="signup_inputField" id="signup_username" type="text" name="signup_username">
                         <!-- Add show password button? -->
-                        <h2>Password : </h2>
+                        <h2>Kata laluan : </h2>
                         <div id="password_criteria">
                             <input class="signup_inputField" id="signup_password" type="password" name="signup_password" autocomplete="on" onkeyup="onPasswordUpdate();">
                             <div>
                                 <img src="./assets/logos/cross.png">
-                                <h3>between 4-8 characters</h3>
+                                <h3>antara 4-8 aksara</h3>
                                 <img src="./assets/logos/cross.png">
-                                <h3>must have at least one uppercase letter</h3>
+                                <h3>sekurang-kurangnya satu huruf besar</h3>
                                 <img src="./assets/logos/check.png">
-                                <h3>must have at least one lowercase letter</h3>
+                                <h3>sekurang-kurangnya satu huruf kecil</h3>
                                 <img src="./assets/logos/check.png">
-                                <h3>must have at least one number</h3>
+                                <h3>sekurang-kurangnya satu nombor</h3>
                                 <img src="./assets/logos/check.png">
-                                <h3>must have at least one special character</h3>
+                                <h3>sekurang-kurangnya satu tanda baca</h3>
                                 <img src="./assets/logos/check.png">
-                                <h3>must not include spaces</h3>
+                                <h3>tidak mempunyai jarak aksara</h3>
                             </div>
                         </div>
-                        <h2>Confirm password : </h2>
+                        <h2>Kata laluan sekali lagi : </h2>
                         <input class="signup_inputField" id="signup_confirm_password" type="password" name="signup_confirm_password" autocomplete="on">
                     </div>
                     <a id="login" href="/login.php">
-                        Back to login
+                        Kembali ke log masuk
                     </a>
                     <input id="submit" type="submit" value="Sign up">
                 </form>

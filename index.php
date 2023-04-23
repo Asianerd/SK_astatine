@@ -10,7 +10,8 @@
 
         if (isset($_COOKIE["login_new"]) && ($_COOKIE["login_new"] <= 0)) {
             setcookie("login_new", 1, time() + (86400 * 14), "/"); // after alert, increment so it doesnt alert again
-            echo "<script>alert(\"Successfully logged in as {$_COOKIE["login_username"]}.\")</script>";
+            //echo "<script>alert(\"Successfully logged in as {$_COOKIE["login_username"]}.\")</script>";
+            echo "<script>alert(\"Berjaya log masuk dengan akaun {$_COOKIE["login_username"]}.\")</script>";
         }
 
         require __DIR__ . '/client/CPU.php'; // import cpu class
@@ -82,7 +83,7 @@
                 </div>
                 <div id="sorting">
                     <h1>
-                        Sort by :
+                        Isih mengikut :
                     </h1>
                     <div id="sort-options">
                         <div id="sort-types">

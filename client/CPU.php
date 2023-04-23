@@ -93,7 +93,7 @@ class Item {
         // for convenience
         return new Item(
             $x['id_CPU'],
-            $x['nama'],
+            $x['model'],
             $x['harga'],
             $x['bilangan_interaksi'],
             $x['nombor_teras'],

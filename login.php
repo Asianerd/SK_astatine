@@ -58,9 +58,9 @@ if ($status == loginStatus::Success) {
                 <h2 id="status">
                     <?php
                     if ($status == loginStatus::UsernameNotFound) {
-                        echo "The username \"{$_POST['login_username']}\" does not exist.";
+                        echo "Username \"{$_POST['login_username']}\" tidak wujud.";
                     } else if ($status == loginStatus::IncorrectPassword) {
-                        echo "Your password was incorrect.";
+                        echo "Kata laluan anda tidak tepat.";
                     }
                     ?>
                 </h2>
@@ -68,13 +68,13 @@ if ($status == loginStatus::Success) {
                     <div id="fields">
                         <h2>Username : </h2>
                         <input type="text" name="login_username" required="" oninvalid="this.setCustomValidity('Your username is required.')" oninput="setCustomValidity('')">
-                        <h2>Password : </h2>
+                        <h2>Kata laluan : </h2>
                         <input type="password" name="login_password" required="" oninvalid="this.setCustomValidity('Your password is required.')" oninput="setCustomValidity('')" autocomplete="on">
                     </div>
                     <a id="signup" href="/signup.php">
-                        Don't have an account? Create one here.
+                        Tiada akaun? Daftar akaun baharu di sini.
                     </a>
-                    <input id="submit" type="submit" value="Log in">
+                    <input id="submit" type="submit" value="Log masuk">
                 </form>
             </div>
         </div>
