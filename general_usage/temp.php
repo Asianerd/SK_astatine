@@ -7,7 +7,7 @@ foreach ($user_db->query("SELECT user_id FROM `user`") as $rows) {
 ?> -->
 
 <?php
-$temp = 0;
+var_dump(explode("i", "abcdef"));
 
 
 
