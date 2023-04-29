@@ -482,8 +482,17 @@ h1, h2, h3 {
 /* #endregion */
 
 h1 {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 100;
+    font-weight:100;
+}
+
+h1, h2, h3 {
+    font-family: 'Open Sans';
+
+    text-align: center;
+
+    color:var(--tertiary);
+
+    margin:0;
 }
 
 a {
@@ -570,16 +579,6 @@ Ubuntu */
 
 .entity_depreciated #price-info h2 {
     font-size:20px;
-}
-
-.entity_depreciated p, h1, h2, h3 {
-    font-family: 'Open Sans';
-
-    text-align: center;
-
-    color:var(--tertiary);
-
-    margin:0;
 }
 
 .entity_depreciated h3 {
