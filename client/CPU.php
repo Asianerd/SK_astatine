@@ -77,7 +77,7 @@ class Item {
     // #endregion
 
     // #region Instance
-    public $id, $name, $price, $interaction_count, $cores, $frequency, $boosted_frequency;
+    public $id, $name, $price, $interaction_count, $cores, $frequency, $boosted_frequency, $image_url;
 
     public function __construct($id, $name, $price, $interaction_count, $cores, $frequency, $boosted_frequency) {
         $this->id = (int)$id;
@@ -87,6 +87,20 @@ class Item {
         $this->cores = (int)$cores;
         $this->frequency = (float)$frequency;
         $this->boosted_frequency = (float)$boosted_frequency;
+        $this->image_url = "default.png";
+
+        if (count(explode("i", $this->name)) > 1) {
+            foreach (explode("i", $this->name) as $s) {
+                $next = substr($s, 0, 1);
+                if (($next == '3') ||
+                    ($next == '5') ||
+                    ($next == '7') ||
+                ($next == '9')) {
+                    $this->image_url = 'i' . $next . '.png';
+                    break;
+                }
+            }
+        }
     }
 
     public static function from_dict($x) {

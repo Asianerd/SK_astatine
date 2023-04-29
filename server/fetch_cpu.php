@@ -74,7 +74,7 @@ if ($sortType != 0) {
 foreach($siftedCollection as $i) {
 $final = $final . "<div class='entity'>
     <div id='showcase-image'>
-        <img src='./assets/sample-images/i9.png'>
+        <img src='./assets/cpu/{$i->image_url}'>
     </div>
     <div id='info-section'>
         <div id='header'>
