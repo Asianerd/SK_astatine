@@ -1,8 +1,9 @@
 #content-parent {
-    width:100%;
+    width:calc(100% - var(--sidebar-closed-width));
     margin:0;
+    margin-left:var(--sidebar-closed-width);
     padding:0;
-    margin-top:calc(10vh + 2cm);
+    margin-top:2cm;
 
     display:flex;
     justify-content:space-evenly;
@@ -12,4 +13,7 @@
     width:33% !important;
 }
 
-
+#prefab_header {
+    height:100%;
+    width:100%;
+}

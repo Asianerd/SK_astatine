@@ -3,20 +3,22 @@
 $("#prefab_header").load('prefabs/header.php', function () {})
 // #endregion
 
-// #region Visuals
-var navbar = 0;
+var opened = false;
+var sidebarParent = undefined;
 
-var scrollAmount = 0;
-var _previousScroll = 0;
-
-onscroll = function () {
-    if (navbar == 0) {
-        navbar = document.getElementsByClassName("nav-bar")[0];
+function onSidebarClick() {
+    if (sidebarParent == undefined) {
+        sidebarParent = document.getElementsByClassName("sidebar-parent")[0];
+    }
+    if (sidebarParent == undefined) {
+        return;
     }
 
-    scrollAmount = this.scrollY - _previousScroll;
-    _previousScroll = this.scrollY;
+    opened = !opened;
 
-    // navbar.style.height = scrollAmount > 0 ? "0vh" : "10vh";
+    sidebarParent.id = opened ? "open" : "closed";
 }
-// #endregion
+
+function logOut() {
+    document.cookie = 'user_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+}
