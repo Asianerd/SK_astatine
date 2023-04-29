@@ -31,6 +31,18 @@ if (isset($_COOKIE["user_id"])) {
                     <img src="../assets/logos/heart_filled.png">
                     <h1>Pilihan diminati</h1>
                 </div>
+                <?php
+                if (($user != 0) && ($user["admin"] == 1)) {
+                    echo "
+                    <a href='/admin/daftar.php'>
+                        <hr>
+                        <div id='nav_element' aria-label='hoverable'>
+                            <img src='../assets/logos/tools.png'>
+                            <h1>Daftar CPU</h1>
+                        </div>
+                    </a>";
+                }
+                ?>
             </div>
             <div>
                 <a href="login.php">
@@ -43,7 +55,7 @@ if (isset($_COOKIE["user_id"])) {
                     if ($user == 0) {
                         echo "<a href='login.php'><div id='nav_element' aria-label='hoverable' onclick='logOut();'><img src='../assets/logos/profile.png'><h1 id='signup'>Daftar akaun</h1></div></a>";
                     } else {
-                        $source = $user["admin"] == 0 ? "profile" : "admin";
+                        $source = $user["admin"] == 1 ? "admin" : "profile";
                         echo "<div id='nav_element'><img src='../assets/logos/{$source}.png'><h1>{$user['nama']}</h1></div>";
                     }
                 ?>
