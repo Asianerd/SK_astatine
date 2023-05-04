@@ -138,7 +138,7 @@ if ($status == signupStatus::Success) {
                     <a id="login" href="/login.php">
                         Kembali ke log masuk
                     </a>
-                    <input id="submit" type="submit" value="Sign up">
+                    <input id="submit" type="submit" value="Daftar pengguna">
                 </form>
             </div>
         </div>
