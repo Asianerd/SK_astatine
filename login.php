@@ -64,12 +64,12 @@ if ($status == loginStatus::Success) {
                     }
                     ?>
                 </h2>
-                <form class="login" action="login.php" method="post" autocomplete="on">
+                <form class="form" action="login.php" method="post" autocomplete="on">
                     <div id="fields">
                         <h2>Username : </h2>
-                        <input type="text" name="login_username" required="" oninvalid="this.setCustomValidity('Username wajib diisi.')" oninput="setCustomValidity('')">
+                        <input placeholder="Username" type="text" name="login_username" required="" oninvalid="this.setCustomValidity('Username wajib diisi.')" oninput="setCustomValidity('')">
                         <h2>Kata laluan : </h2>
-                        <input type="password" name="login_password" required="" oninvalid="this.setCustomValidity('Kata laluan wajib diisi.')" oninput="setCustomValidity('')" autocomplete="on">
+                        <input placeholder="Kata laluan" type="password" name="login_password" required="" oninvalid="this.setCustomValidity('Kata laluan wajib diisi.')" oninput="setCustomValidity('')" autocomplete="on">
                     </div>
                     <a id="signup" href="/signup.php">
                         Tiada akaun? Daftar akaun baharu di sini.

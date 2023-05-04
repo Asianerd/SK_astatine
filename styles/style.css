@@ -39,6 +39,8 @@ Ubuntu
     --background-secondary : #262d37;
     --background-tertiary : #3970ff; /* 3970ff or 1e60fc */
     --border-color : #303945;
+    --border-color-bright : #37414e;
+    
     --entity-background-primary : #0f0e0f;
     --entity-background-secondary : #151315;
     --primary : #fff;

@@ -107,16 +107,16 @@ if ($status == signupStatus::Success) {
                     }
                     ?>
                 </h2>
-                <form class="login" action="signup.php" method="POST" autocomplete="on" onsubmit="return validateForm();">
+                <form class="form" action="signup.php" method="POST" autocomplete="on" onsubmit="return validateForm();">
                     <div id="fields">
                         <h2>Nama : </h2>
-                        <input class="signup_inputField" id="signup_name" type="text" name="signup_name">
+                        <input placeholder="Nama" class="signup_inputField" id="signup_name" type="text" name="signup_name">
                         <h2>Username : </h2>
-                        <input class="signup_inputField" id="signup_username" type="text" name="signup_username">
+                        <input placeholder="Username" class="signup_inputField" id="signup_username" type="text" name="signup_username">
                         <!-- Add show password button? -->
                         <h2>Kata laluan : </h2>
                         <div id="password_criteria">
-                            <input class="signup_inputField" id="signup_password" type="password" name="signup_password" autocomplete="on" onkeyup="onPasswordUpdate();">
+                            <input placeholder="Kata laluan" class="signup_inputField" id="signup_password" type="password" name="signup_password" autocomplete="on" onkeyup="onPasswordUpdate();">
                             <div>
                                 <img src="./assets/logos/cross.png">
                                 <h3>antara 4-8 aksara</h3>
@@ -133,7 +133,7 @@ if ($status == signupStatus::Success) {
                             </div>
                         </div>
                         <h2>Kata laluan sekali lagi : </h2>
-                        <input class="signup_inputField" id="signup_confirm_password" type="password" name="signup_confirm_password" autocomplete="on">
+                        <input placeholder="Kata laluan sekali lagi" class="signup_inputField" id="signup_confirm_password" type="password" name="signup_confirm_password" autocomplete="on">
                     </div>
                     <a id="login" href="/login.php">
                         Kembali ke log masuk

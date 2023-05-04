@@ -6,9 +6,9 @@
 
     background:var(--background-secondary);
 
-    width:50vw;
-    height:45vh;
-    padding-top:5vh;
+    min-width:40vw;
+    min-height:45vh;
+    padding:5vh 5vw 0 5vw;
 
     margin:0;
 
@@ -20,12 +20,14 @@
 }
 
 .parent > h1 {
+    white-space:nowrap;
+
     color:var(--primary);
 
     font-size:45px;
 }
 
-.login {
+.form {
     display:flex;
     justify-content: space-evenly;
     align-items: center;
@@ -34,12 +36,35 @@
     font-family: 'Nunito', sans-serif;
     /* font-family: monospace; */
 
-    height:25ch;
+    min-height:25ch;
 
     color:var(--primary);
 }
 
-.login #fields {
+/* #region Input */
+.form input {
+    color:white;
+
+    background:var(--border-color);
+    border:none;
+
+    font-size:1.3em;
+    /* font-family:monospace; */
+
+    padding:0.1em 0.5em 0.1em 0.5em;
+    border-radius:0.3em;
+
+    transition-duration:0.3s;
+
+    transition-timing-function: ease;
+}
+
+.form input:focus {
+    background:var(--border-color-bright);
+}
+/* #endregion */
+
+.form #fields {
     display:grid;
     grid-template-columns: auto auto;
     row-gap: 1ch;
@@ -50,13 +75,13 @@
     align-items: center;
 }
 
-.login #fields input {
+.form #fields input {
     height:2.5ch;
     width:15em;
 }
 
 /* #region Password criteria */
-.login #password_criteria {
+.form #password_criteria {
     position:relative;
 
     display: flex;
@@ -64,7 +89,7 @@
     flex-direction: column;
 }
 
-.login #password_criteria > div {
+.form #password_criteria > div {
     background:var(--background-primary);
     display:grid;
     grid-template-columns: auto auto;
@@ -92,18 +117,18 @@
     filter:drop-shadow(0px 10px 10px #0005);
 }
 
-.login #password_criteria > div > img {
+.form #password_criteria > div > img {
     height:2ch;
     padding:0.2ch 1em 0.2ch 0;
 }
 
-.login #password_criteria input:focus + div {
+.form #password_criteria input:focus + div {
     height:20ch;
 
     padding:1ch 1em;
 }
 
-.login #password_criteria > div > h3 {
+.form #password_criteria > div > h3 {
     /* font-family: monospace; */
     font-weight: 200;
     font-size:16px;
@@ -115,8 +140,10 @@
 }
 /* #endregion */
 
-.login #fields > h2 {
+.form #fields > h2 {
     justify-self: end;
+
+    white-space:nowrap;
 
     font-family: 'Nunito', sans-serif;
     font-weight:100;
@@ -124,25 +151,25 @@
     padding-right:0.5em;
 }
 
-.login > a {
+.form > a {
     color:var(--background-tertiary);
     font-style:italic;
 
     transition-duration:0.3s;
 }
 
-.login > #signup:hover {
+.form > #signup:hover {
     text-shadow: 0px 0px 5px var(--background-tertiary);
     transform:translateX(5%);
 }
 
-.login > #login:hover {
+.form > #login:hover {
     text-shadow: 0px 0px 5px var(--background-tertiary);
     transform:translateX(-5%);
 }
 
 /* #region Submit */
-.login #submit {
+.form #submit {
     padding:5px 10px 5px 10px;
     cursor:pointer;
 
@@ -159,18 +186,18 @@
     transition-duration:0.3s;
 }
 
-.login #submit:hover {
+.form #submit:hover {
     transform:translateY(-10%);
 }
 /* #endregion */
 
 .parent.signup {
-    height:55vh !important;
+    min-height:55vh !important;
     padding-top:5vh;
 }
 
-.parent.signup .login {
-    height:35ch;
+.parent.signup .form {
+    min-height:35ch;
 }
 
 .parent #status {
@@ -178,3 +205,5 @@
     font-style: italic;
     font-weight: 100;
 }
+
+
