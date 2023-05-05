@@ -81,15 +81,15 @@ isset($_POST["daftar_boosted_frequency"])) {
                     <div id="fields">
                         <!-- model, harga, nombor_teras, frekuensi, frekuensi_tertinggi -->
                         <h2>Model : </h2>
-                        <input placeholder="Model" type="text" name="daftar_name" required="" maxlength="50" oninvalid="this.setCustomValidity('Sila masukkan model yang sah.')" oninput="setCustomValidity('')">
-                        <h2>Harga (MYR) : </h2>
-                        <input placeholder="Harga" type="number" step="0.01" max="1000000000000000000" name="daftar_price" required="" oninvalid="this.setCustomValidity('Sila masukkan harga yang sah.')" oninput="setCustomValidity('')">
+                        <input placeholder="Eg: Intel Core i9-13900KS" type="text" name="daftar_name" required="" maxlength="50" oninvalid="this.setCustomValidity('Sila masukkan model yang sah.')" oninput="setCustomValidity('')">
+                        <h2>Harga : </h2>
+                        <input placeholder="Mata wang MYR sahaja" type="number" step="0.01" max="1000000000000000000" name="daftar_price" required="" oninvalid="this.setCustomValidity('Sila masukkan harga yang sah.')" oninput="setCustomValidity('')">
                         <h2>Nombor teras : </h2>
-                        <input placeholder="Nombor teras" type="number" name="daftar_cores" required="" oninvalid="this.setCustomValidity('Sila masukkan nombor teras yang sah.')" oninput="setCustomValidity('')">
+                        <input placeholder="Nombor bulat sahaja" type="number" name="daftar_cores" required="" oninvalid="this.setCustomValidity('Sila masukkan nombor teras yang sah.')" oninput="setCustomValidity('')">
                         <h2>Frekuensi : </h2>
-                        <input placeholder="Frekuensi" type="number" step="0.1" name="daftar_frequency" required="" oninvalid="this.setCustomValidity('Sila masukkan frekuensi yang sah.')" oninput="setCustomValidity('')">
+                        <input placeholder="Dalam unit GHz" type="number" step="0.1" name="daftar_frequency" required="" oninvalid="this.setCustomValidity('Sila masukkan frekuensi yang sah.')" oninput="setCustomValidity('')">
                         <h2>Frekuensi tertinggi : </h2>
-                        <input placeholder="Frekuensi tertinggi" type="number" step="0.1" name="daftar_boosted_frequency" required="" oninvalid="this.setCustomValidity('Sila masukkan frekuensi tertinggi yang sah.')" oninput="setCustomValidity('')">
+                        <input placeholder="Dalam unit GHz" type="number" step="0.1" name="daftar_boosted_frequency" required="" oninvalid="this.setCustomValidity('Sila masukkan frekuensi tertinggi yang sah.')" oninput="setCustomValidity('')">
                     </div>
                     <input id="submit" type="submit" value="Daftar">
                 </form>
