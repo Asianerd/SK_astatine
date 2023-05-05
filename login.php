@@ -43,7 +43,7 @@ if ($status == loginStatus::Success) {
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Astatine.shop : Login</title>
+        <title>Astatine.eshop : Log masuk</title>
         <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="./styles/style.css">
@@ -53,7 +53,7 @@ if ($status == loginStatus::Success) {
         <div style="position:absolute; top:0; left:0; height:100vh; width:100vw; padding:0; margin:0; display:flex; justify-content:center; align-items:center;">
             <div class="parent">
                 <h1>
-                    astatine.shop
+                    astatine.eshop
                 </h1>
                 <h2 id="status">
                     <?php

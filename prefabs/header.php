@@ -17,7 +17,7 @@ if (isset($_COOKIE["user_id"])) {
             <div>
                 <div id="nav_element">
                     <img src="../white_favicon.ico">
-                    <h1>astatine.shop</h1>
+                    <h1>astatine.eshop</h1>
                 </div>
                 <hr>
                 <a href="index.php">
