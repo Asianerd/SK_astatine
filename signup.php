@@ -54,7 +54,7 @@ if (isset($_POST["signup_name"]) &&
          */
         $current_user_id = 0;
         $found = false;
-        foreach ($user_db->query("SELECT user_id FROM `pelanggan`") as $rows) { // queries all users
+        foreach ($user_db->query("SELECT user_id FROM `pelanggan` ORDER BY user_id ASC") as $rows) { // queries all users
             $current = (int)$rows["user_id"]; // $current = user's id
             $current_user_id++; // increments $current_user_id
 

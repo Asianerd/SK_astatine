@@ -23,7 +23,7 @@ isset($_POST["daftar_boosted_frequency"])) {
         // this algorithm is explained in signup.php
         $current_cpu_id = 0;
         $found = false;
-        foreach ($db->query("SELECT id_CPU FROM `cpu`") as $rows) {
+        foreach ($db->query("SELECT id_CPU FROM `cpu` ORDER BY id_CPU ASC") as $rows) {
             $current = (int)$rows["id_CPU"];
             $current_cpu_id++;
 
