@@ -256,7 +256,7 @@ h1, h2, h3 {
 
 .sidebar #nav_element img {
     width:calc(var(--sidebar-closed-width) * 0.5);
-    margin-right:calc(var(--sidebar-closed-width) * 0.255);
+    margin-right:calc(var(--sidebar-closed-width) * 0.29);
 }
 
 .sidebar #nav_element h1 {
