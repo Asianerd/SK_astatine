@@ -23,6 +23,7 @@
     </head>
     <body>
         <div id="prefab_header"></div>
+        <div id="prefab_login_popup" aria-label="inactive"></div>
         <!-- <img src="/assets/outrun.gif" id="background-image"> -->
         <!-- <div id="prefab_item_filter"></div> -->
         <div id="content-parent">
@@ -116,5 +117,6 @@
         <div style="height:50vh;"></div>
         <script src="./scripts/main_script.js"></script>
         <script src="./scripts/homepage.js"></script>
+        <script src="./scripts/entity_events.js"></script>
     </body>
 </html>

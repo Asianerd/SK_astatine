@@ -71,8 +71,17 @@ if ($sortType != 0) {
     });
 }
 
+$result = [];
+if (isset($_COOKIE["user_id"])) {
+    $db = new mysqli($hostname='localhost', $username='astatine', $password='password', $database='astatine_data');
+    foreach ($db->query("SELECT * FROM PILIHAN WHERE {$_COOKIE['user_id']} = user_id") as $record) {
+        array_push($result, $record["id_CPU"]);
+    }
+}
+
 foreach($siftedCollection as $i) {
-$final = $final . "<div class='entity'>
+    $liked = in_array($i->id, $result);
+    $final = $final . "<div class='entity' id='instantiated_entity_{$i->id}' onclick='like_entity({$i->id})'".($liked ? "aria-label='liked'" : "").">
     <div id='showcase-image'>
         <img src='./assets/cpu/{$i->image_url}'>
     </div>
@@ -90,8 +99,8 @@ $final = $final . "<div class='entity'>
             <div id='data'>
                 <h1>{$currencyFormatter->formatCurrency($i->price, 'MYR')}</h1>
                 <div>
-                    <h1>{$numberFormatter->format($i->interaction_count)}</h1>
-                    <img src='./assets/logos/eye.png'>
+                    <h1 id='like_amount'>{$numberFormatter->format($i->interaction_count)}</h1>
+                    <img id='like_indicator' src='./assets/logos/".($liked ? '' : 'white_')."heart_filled.png'>
                 </div>
             </div>
             <div id='hz'>
