@@ -1,7 +1,7 @@
 // #region Prefabs
 // JQuery 😎
-$("#prefab_header").load('prefabs/sidebar.php', function () {})
-$("#prefab_login_popup").load('prefabs/login_popup.html', function () {})
+$("#prefab_header").load('/prefabs/sidebar.php', function () {})
+$("#prefab_login_popup").load('/prefabs/login_popup.html', function () {})
 // #endregion
 
 var opened = false;
@@ -18,6 +18,26 @@ function onSidebarClick() {
     opened = !opened;
 
     sidebarParent.id = opened ? "open" : "closed";
+
+    if (sidebarParent.id == "closed") {
+        return;
+    }
+
+    var slogans = [
+        "Mencari CPU dari seluruh dunia",
+        "Pilihan yang murah",
+        "Ribuan CPU di hujung jari",
+        "Mencari CPU yang teringin"
+    ];
+    var current = document.getElementById("slogan").innerHTML;
+    for (var i = 0; i <= 20; i++) {
+        target = slogans[parseInt(Math.floor(Math.random() * slogans.length))];
+        if (target == current) {
+            continue;
+        }
+        document.getElementById("slogan").innerHTML = target;
+        return;
+    }
 }
 
 function logOut() {
