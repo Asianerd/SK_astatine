@@ -92,6 +92,7 @@ class Item {
         if (count(explode("i", $this->name)) > 1) {
             foreach (explode("i", $this->name) as $s) {
                 $next = substr($s, 0, 1);
+                // i3, i5, i7, i9 cores
                 if (($next == '3') ||
                     ($next == '5') ||
                     ($next == '7') ||

@@ -28,7 +28,7 @@ $frequencyHigh = $_REQUEST["frequency-high"];
 $priceLow = $_REQUEST["price-low"];
 $priceHigh = $_REQUEST["price-high"];
 
-$sortType = $_REQUEST["sort"]; // cores, frequency, price
+$sortType = $_REQUEST["sort"]; // cores, frequency, price, liked
 $sortDirection = $_REQUEST["direction"]; // 0 is descending, 1 is ascending
 
 
@@ -61,8 +61,16 @@ foreach(Item::$collection as $i) {
     array_push($siftedCollection, $i);
 }
 
+$sort_dict = array(
+    1=>"cores",
+    2=>"boosted_frequency",
+    3=>"price",
+    4=>"interaction_count"
+);
+
 if ($sortType != 0) {
-    $attributeName = $sortType == 1 ? "cores" : ($sortType == 2 ? "boosted_frequency" : "price");
+    //$attributeName = $sortType == 1 ? "cores" : ($sortType == 2 ? "boosted_frequency" : "price");
+    $attributeName = $sort_dict[$sortType];
     usort($siftedCollection, function ($a, $b) use ($attributeName, $sortDirection) { // 'use' keyword so that a few variables can be used
         return $a->$attributeName == $b->$attributeName ? 0 :           // same = 0
             ($a->$attributeName > $b->$attributeName ? $sortDirection : // greater = 1

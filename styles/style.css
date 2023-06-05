@@ -272,6 +272,35 @@ h1, h2, h3 {
     font-weight:normal;
     font-style:italic;
 }
+
+/* #region Slogan */
+.sidebar-parent div > #nav_element:first-child {
+    margin-bottom:0;
+    padding-bottom:calc(var(--sidebar-closed-width) * 0.125);
+}
+
+.sidebar h3#slogan {
+    font-weight:lighter;
+    font-style:italic;
+    white-space: nowrap;
+    font-size:calc(var(--sidebar-closed-width) * 0.25);
+    padding:0;
+    margin:0;
+
+    transition-duration:0.3s;
+}
+
+.sidebar-parent#closed h3#slogan {
+    opacity: 0;
+    height:0;
+}
+
+.sidebar-parent#open h3#slogan {
+    height:1ch;
+
+    margin-bottom:calc(var(--sidebar-closed-width) * 0.2);
+}
+/* #endregion */
 /* #endregion */
 
 /* #region Item filter */
@@ -419,7 +448,7 @@ h1, h2, h3 {
 }
 
 /* #region Sort types */
-.item-filter #sort-types {
+/* .item-filter #sort-types {
     display:flex;
     justify-content: space-evenly;
     flex-direction: row;
@@ -433,6 +462,7 @@ h1, h2, h3 {
 
 .item-filter #sort-types label {
     padding:0.4ch 2ch 0.4ch 2ch;
+    margin:0;
     border-radius: 10ch;
 
     border-width:0.2ch;
@@ -440,6 +470,56 @@ h1, h2, h3 {
     border-color:var(--background-tertiary);
 
     cursor:pointer;
+}
+.item-filter #sort-types label img {
+    position:relative;
+    
+    padding:0;
+    margin:0;
+    height:5em;
+    aspect-ratio: 1;
+} */
+
+.item-filter #sort-types {
+    display:flex;
+    /* grid-template-columns: auto auto auto auto;
+    row-gap: 0.5em;
+    column-gap:0.5em; */
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+
+    cursor:pointer;
+}
+
+.item-filter #sort-types label {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+
+    margin-left:0.5em;
+
+    height:3em;
+    aspect-ratio: 1;
+
+    border-style:solid;
+    border-radius:10000px;
+    border-width:1px;
+    border-color:var(--background-tertiary);
+
+    cursor:pointer;
+}
+
+.item-filter #sort-types img {
+    height:70%;
+    aspect-ratio: 1;
+    object-fit:contain;
+
+    cursor:pointer;
+}
+
+.item-filter #sort-types input {
+    display:none;
 }
 
 .item-filter #sort-types input:checked + label {

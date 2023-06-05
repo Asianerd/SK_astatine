@@ -88,7 +88,7 @@
                     </h1>
                     <div id="sort-options">
                         <div id="sort-types">
-                            <input type="radio" name="sort-option" id="sort-options-core" value="1">
+                            <!-- <input type="radio" name="sort-option" id="sort-options-core" value="1">
                             <label for="sort-options-core">
                                 <h3>Teras</h3>
                             </label>
@@ -99,6 +99,26 @@
                             <input type="radio" name="sort-option" id="sort-options-price" value="3">
                             <label for="sort-options-price">
                                 <h3>Harga</h3>
+                            </label> -->
+                            <!-- <input type="radio" name="sort-option" id="sort-options-price" value="4">
+                            <label for="sort-options-likes">
+                                <h3>Keminatan</h3>
+                            </label> -->
+                            <input type="radio" name="sort-option" id="sort-options-core" value="1">
+                            <label for="sort-options-core">
+                                <img src='/assets/logos/core.png'>
+                            </label>
+                            <input type="radio" name="sort-option" id="sort-options-frequency" value="2">
+                            <label for="sort-options-frequency">
+                                <img src='/assets/logos/frequency.png'>
+                            </label>
+                            <input type="radio" name="sort-option" id="sort-options-price" value="3">
+                            <label for="sort-options-price">
+                                <img src='/assets/logos/money.png'>
+                            </label>
+                            <input type="radio" name="sort-option" id="sort-options-liked" value="4">
+                            <label for="sort-options-liked">
+                                <img src='/assets/logos/white_heart.png'>
                             </label>
                         </div>
                         <div id="sort-direction" onclick="sortDirectionClick();">
