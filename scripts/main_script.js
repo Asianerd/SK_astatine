@@ -27,7 +27,8 @@ function onSidebarClick() {
         "Mencari CPU dari seluruh dunia",
         "Pilihan yang murah",
         "Ribuan CPU di hujung jari",
-        "Mencari CPU yang teringin"
+        "Mencari CPU yang teringin",
+        "Buat perbandingan CPU lain"
     ];
     var current = document.getElementById("slogan").innerHTML;
     for (var i = 0; i <= 20; i++) {
