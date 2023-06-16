@@ -56,13 +56,12 @@ isset($_POST["daftar_boosted_frequency"])) {
 <html>
     <head>
         <title>Daftar CPU</title>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="../styles/style.css">
         <link rel="stylesheet" href="../styles/login.css">
         <link rel="stylesheet" href="../styles/admin/daftar.css">
     </head>
     <body>
-        <div id="prefab_header"></div>
+        <?php include '../prefabs/sidebar.php'; ?>
         <div style="height:100vh;width:100vw;margin:0;padding:0;display:flex;justify-content:center;align-items:center;">
             <div id="parent">
                 <h1>Daftar CPU</h1>

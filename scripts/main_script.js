@@ -1,8 +1,5 @@
-// #region Prefabs
-// JQuery 😎
-$("#prefab_header").load('/prefabs/sidebar.php', function () {})
-$("#prefab_login_popup").load('/prefabs/login_popup.html', function () {})
-// #endregion
+// $("#prefab_header").load('/prefabs/sidebar.php', function () {})
+// $("#prefab_login_popup").load('/prefabs/login_popup.html', function () {})
 
 var opened = false;
 var sidebarParent = undefined;

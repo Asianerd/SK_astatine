@@ -44,7 +44,6 @@ if ($status == loginStatus::Success) {
 <html>
     <head>
         <title>Astatine.eshop : Log masuk</title>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="./styles/style.css">
         <link rel="stylesheet" href="./styles/login.css">
