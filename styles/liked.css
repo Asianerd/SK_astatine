@@ -1,0 +1,30 @@
+#title {
+    margin-left:var(--sidebar-closed-width);
+}
+
+#title h1 {
+    font-size: 50px !important;
+    margin-top:3ch;
+    margin-bottom:0.3ch;
+    color:white;
+}
+
+#title hr {
+    font-size: 50px !important;
+    width: calc(20ch);
+    margin:auto;
+}
+
+#title hr + hr {
+    margin-top:0.3ch;
+    width: calc(18ch) !important;
+}
+
+.query-result {
+    width: calc(100% - var(--sidebar-closed-width));
+
+    margin: 1cm 0 2cm var(--sidebar-closed-width) !important;
+    padding:0;
+
+    justify-content: center;
+}
