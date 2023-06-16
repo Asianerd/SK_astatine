@@ -6,7 +6,7 @@ const currencyFormatter = Intl.NumberFormat('en', {
 
 const amountFormatter = Intl.NumberFormat('en', { notation: 'compact' } );
 
-const itemContainer = document.getElementsByClassName("item-container")[0];
+const queryContainer = document.getElementsByClassName("query-result")[0];
 
 var sortDirection = true;
 const sortDirectionImg = document.querySelector("#sort-direction img");
@@ -15,6 +15,7 @@ const sortDirectionText = document.querySelector("#sort-direction h3");
 const sortItems = document.querySelectorAll("#sort-types input");
 var sortItemValue = 0;
 
+const searchBar = document.querySelector("#content-parent #search-bar input");
 const sliderData = {};
 const sliderTexts = Array.from(document.getElementsByClassName("slider-text"));
 var fullyInitialized = false;
@@ -49,7 +50,7 @@ function updateEntityList() {
     http.onreadystatechange = function() {
         if ((this.readyState == 4) && (this.status == 200)) {
             // if there isnt any error from http, set the container innerhtml
-            itemContainer.innerHTML = this.response;
+            queryContainer.innerHTML = this.response;
         }
     }
 
@@ -63,8 +64,9 @@ function updateEntityList() {
 
     args += `&sort=${sortItemValue}`;
     args += `&direction=${sortDirection ? 1 : -1}`;
+    args += `&search_input=${searchBar.value}`;
 
-    http.open("GET", `../server/fetch_cpu.php?${args}`, true);
+    http.open("GET", `../server/fetch_cpu.php?request-mode=filtered&${args}`, true);
     http.send();
     // send it to the fetch_cpu.php file
 }
@@ -115,3 +117,60 @@ sortItems.forEach(element => {
         updateEntityList();
     })
 })
+
+searchBar.addEventListener('input', updateEntityList)
+
+// #region typing effect
+// shamelessly stolen from https://codepen.io/gschier/pen/DLmXKJ
+var TxtRotate = function(el, toRotate, period) {
+    this.toRotate = toRotate;
+    this.el = el;
+    this.loopNum = 0;
+    this.period = parseInt(period, 10) || 2000;
+    this.txt = '';
+    this.tick();
+    this.isDeleting = false;
+};
+
+TxtRotate.prototype.tick = function() {
+    var i = this.loopNum % this.toRotate.length;
+    var fullTxt = this.toRotate[i];
+
+    if (this.isDeleting) {
+        this.txt = fullTxt.substring(0, this.txt.length - 1);
+    } else {
+        this.txt = fullTxt.substring(0, this.txt.length + 1);
+    }
+
+    this.el.placeholder = this.txt;
+
+    var that = this;
+    var delta = 150 - (Math.random() * 100);
+
+    if (this.isDeleting) {
+        delta *= 0.5;
+    }
+
+    if (!this.isDeleting && this.txt === fullTxt) {
+        delta = this.period;
+        this.isDeleting = true;
+    } else if (this.isDeleting && this.txt === '') {
+        this.isDeleting = false;
+        this.loopNum++;
+        delta = 500;
+    }
+
+    setTimeout(function() {
+        that.tick();
+    }, delta);
+};
+
+var elements = document.getElementsByClassName('typing-effect');
+for (var i=0; i<elements.length; i++) {
+    var toRotate = elements[i].getAttribute('data-rotate');
+    var period = elements[i].getAttribute('data-period');
+    if (toRotate) {
+        new TxtRotate(elements[i], JSON.parse(toRotate), period);
+    }
+}
+// #endregion
