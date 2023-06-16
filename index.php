@@ -2,7 +2,6 @@
 <html>
     <head>
         <title>Astatine.eshop</title>
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="icon" type="image/x-icon" href="/favicon.ico">
         <link rel="stylesheet" href="./styles/style.css">
         <link rel="stylesheet" href="./styles/homepage.css">
@@ -22,8 +21,10 @@
         ?>
     </head>
     <body>
-        <div id="prefab_header"></div>
-        <div id="prefab_login_popup" aria-label="inactive"></div>
+        <!-- <div id="prefab_header"></div> -->
+        <?php include './prefabs/sidebar.php'; ?>
+        <!-- <div id="prefab_login_popup" aria-label="inactive"></div> -->
+        <?php include './prefabs/login_popup.html'; ?>
         <!-- <img src="/assets/outrun.gif" id="background-image"> -->
         <!-- <div id="prefab_item_filter"></div> -->
         <div id="content-parent">
@@ -130,8 +131,27 @@
                     </div>
                 </div>
             </div>
-            <div class="item-container" style="width:60%;">
-                <!-- all cpu entities are here -->
+            <div style="width:60%;">
+                <div id="search-bar">
+                    <div id="image-container">
+                        <img src="./assets/logos/search.png">
+                    </div>
+                    <hr>
+                    <input class="typing-effect" data-period="2000" data-rotate='<?php 
+                    $cpu_names = [];
+
+                    foreach (Item::$collection as $cpu) {
+                        array_push($cpu_names, "\"{$cpu->name}\"");
+                    }
+
+                    shuffle($cpu_names);
+
+                    echo '['.implode(',', $cpu_names).']';
+                    ?>' type="text">
+                </div>
+                <div class="query-result">
+                    <!-- all cpu entities + extra info are here -->
+                </div>
             </div>
         </div>
         <div style="height:50vh;"></div>

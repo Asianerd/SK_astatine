@@ -58,6 +58,9 @@ Ubuntu
 
     --sidebar-opened-width : 40ch;
     --sidebar-closed-width : 10ch;
+
+    --entity-height: 9cm;
+    --entity-width: 10cm;
 }
 
 
@@ -291,7 +294,7 @@ h1, h2, h3 {
 
     transition-duration:0.3s;
 }
-
+ 
 .sidebar-parent#closed h3#slogan {
     opacity: 0;
     height:0;
@@ -483,13 +486,14 @@ h1, h2, h3 {
 } */
 
 .item-filter #sort-types {
-    display:flex;
+    /* display:flex; */
     /* grid-template-columns: auto auto auto auto;
     row-gap: 0.5em;
     column-gap:0.5em; */
-    justify-content: center;
+    /* justify-content: center;
     align-items: center;
-    flex-direction: row;
+    flex-direction: row; */
+    justify-content: left;
 
     cursor:pointer;
 }
@@ -499,7 +503,10 @@ h1, h2, h3 {
     justify-content: center;
     align-items: center;
 
+    float:left;
+
     margin-left:0.5em;
+    margin-bottom:0.5em;
 
     height:3em;
     aspect-ratio: 1;
@@ -513,7 +520,7 @@ h1, h2, h3 {
 }
 
 .item-filter #sort-types img {
-    height:70%;
+    height:50%;
     aspect-ratio: 1;
     object-fit:contain;
 
@@ -705,6 +712,18 @@ a {
 
     justify-content: center;
 }
+
+.query-result h3#query-count {
+    color:var(--border-color);
+    font-style:italic;
+    margin-top:2em;
+}
+
+.query-result h1#empty-query {
+    color:white;
+
+    margin:5ch 0 5ch 0;
+}
 /* #endregion */
 
 /* #region Entity (depreciated) */
@@ -827,8 +846,8 @@ Ubuntu */
     color:white;
 
     background:black;
-    height:9cm;
-    width:10cm;
+    height:var(--entity-height);
+    width:var(--entity-width);
 
     border-style:solid;
     border-width:2px;
