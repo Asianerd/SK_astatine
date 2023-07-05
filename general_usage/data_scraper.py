@@ -1984,6 +1984,8 @@ raw_html_data = """
 <li id="pk4767"><span class="more_details" onclick="p(event, '49,388', 149, 21, 16, 2, '$1,099.99', null, null);"></span><a href="cpu.php?cpu=AMD+Ryzen+Threadripper+PRO+5955WX&amp;id=4767"><span class="prdname">AMD Ryzen Threadripper PRO 5955WX</span><div><span class="index purple" style="width: 16.9%">(16.9%)</span></div><span class="count">44.9</span><span class="mark-neww">49,388</span><span class="price-neww">$1,099.99</span></a></li>
 <li id="pk3636"><span class="more_details" onclick="p(event, '20,795', 150, 11, 8, 2, '$487.10', null, null);"></span><a href="cpu.php?cpu=AMD+EPYC+7262&amp;id=3636"><span class="prdname">AMD EPYC 7262</span><div><span class="index blue" style="width: 16.1%">(16.1%)</span></div><span class="count">42.7</span><span class="mark-neww">20,795</span><span class="price-neww">$487.10</span></a></li>"""
 
+"""<li id="pk5176"><span class="more_details" onclick="p(event, '49,574', 77, 56, 16, 2, '$549.99', null, null);"></span><a href="cpu.php?cpu=Intel+Core+i9-13900&amp;id=5176"><span class="prdname">Intel Core i9-13900</span><div><span class="index orange" style="width: 34.0%">(34.0%)</span></div><span class="count">90.1</span><span class="mark-neww">49,574</span><span class="price-neww">$549.99</span></a></li>"""
+
 # data = []
 # for x in raw_data.strip().split("\n"):
 #     name = x.split(",")[0]
@@ -2023,9 +2025,18 @@ raw_html_data = """
 
 # print('\n'.join([str(x) for x in final]))
 
-raw = """
-<li id="pk4807"><span class="more_details" onclick="p(event, '19,620', 1, 1420, 6, 2, '$84.99', null, null);"></span><a href="cpu.php?cpu=AMD+Ryzen+5+5500&amp;id=4807"><span class="prdname">AMD Ryzen 5 5500</span><div><span class="index pink" style="width: 87.0%">(87.0%)</span></div><span class="count">230.8</span><span class="mark-neww">19,620</span><span class="price-neww">$84.99</span></a></li>
-"""
+# raw_csv = """
+# company,name,codename,cores,threads,base_clock,boost_clock,socket,process,l3_cache,tdp,released
+# Intel,Core i9-10900,Comet Lake,10,20,2.8,5.2,1200,14,20,65,2020-05-27
+# """
+
+
+# raw_html_data = """
+# <li id="pk3745"><span class="more_details" onclick="p(event, '20,161', 143, 540, 10, 2, '$399.00', null, null);"></span><a href="cpu.php?cpu=Intel+Core+i9-10900+%40+2.80GHz&amp;id=3745"><span class="prdname">Intel Core i9-10900 @ 2.80GHz</span><div><span class="index green" style="width: 19.0%">(19.0%)</span></div><span class="count">50.5</span><span class="mark-neww">20,161</span><span class="price-neww">$399.00</span></a></li>
+# """
+
+
+
 
 # <li id="pk4807">
 #     <span class="more_details" onclick="p(event, '19,620', 1, 1420, 6, 2, '$84.99', null, null);"></span>
@@ -2062,18 +2073,28 @@ for x in raw_html_data.strip().split('\n'):
     if name.split(' ')[1] != 'Core':
         continue
     name = ' '.join(name.split(' ')[0:3])
-    print(name)
     cpus[name] = {}
+    
+    cpus[name]['price'] = float(x.split('<span class="price-neww">$')[-1].split("</span>")[0])
+
+cpus = dict(sorted([(x, cpus[x]) for x in cpus.keys()], key=lambda y:y[0]))
 
 #1356
 'company,name,codename,cores,threads,base_clock,boost_clock,socket,process,l3_cache,tdp,released'
 for x in raw_csv.strip().split('\n')[1:]:
     d = x.split(',')
-    if (d[1] + 'Intel') in cpus:
-        name = (d[1] + 'Intel')
+    name = f'{d[0]} {d[1]}'
+    if name in cpus.keys():
         cpus[name]['cores'] = d[3]
         cpus[name]['boosted'] = d[6]
         cpus[name]['freq'] = d[5]
+        
+        if (cpus[name]['boosted'] == "NA"):
+            cpus[name]['boosted'] = cpus[name]['freq']
 
-for x in sorted([(x, cpus[x]) for x in cpus]):
-    print(x)
+cpus = dict([(i, cpus[i]) for i in cpus if len(cpus[i]) > 1])
+
+starting_index = 9
+for i, x in enumerate(dict(sorted([(x, cpus[x]) for x in cpus]))):
+    o = cpus[x]
+    print(f'INSERT INTO cpu VALUES({starting_index + i}, \'{x}\', {o["price"]}, 0, {o["cores"]}, {o["freq"]}, {o["boosted"]});')
