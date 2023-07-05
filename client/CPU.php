@@ -2,6 +2,7 @@
 
 class Item {
     // #region Statics
+    public static $COLUMN_COUNT = 7;
     public static array $collection; // holds all cpu items
     public static array $slider_ranges;
     static array $data_ranges;

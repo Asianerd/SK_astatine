@@ -3,7 +3,7 @@ html, head, body {
     padding:0;
 }
 
-#parent {
+.parent {
     display:flex;
     justify-content: space-evenly;
     align-items: center;
@@ -22,7 +22,7 @@ html, head, body {
     background:var(--background-secondary);
 }
 
-#parent h1 {
+.parent h1 {
     color:white;
     font-weight: normal;
 }
@@ -73,15 +73,32 @@ html, head, body {
     align-items: center;
 } */
 
-#parent > h2 {
+.parent > h2 {
     font-style:italic;
     font-weight:lighter;
 }
 
-#parent h2#error {
+.parent h2#error {
     color:red;
 }
 
-#parent h2#success {
+.parent h2#success {
     color:chartreuse;
+}
+
+#import_file {
+    color:var(--background-tertiary);
+
+    font-family:'Nunito', sans-serif;
+    
+    font-style:italic;
+    text-decoration: none;
+
+    margin:2ch 0 2ch 0;
+
+    transition-duration: 0.3s;
+}
+
+#import_file:hover {
+    transform:translateX(10px);
 }

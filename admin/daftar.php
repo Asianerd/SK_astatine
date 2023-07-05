@@ -63,7 +63,7 @@ isset($_POST["daftar_boosted_frequency"])) {
     <body>
         <?php include '../prefabs/sidebar.php'; ?>
         <div style="height:100vh;width:100vw;margin:0;padding:0;display:flex;justify-content:center;align-items:center;">
-            <div id="parent">
+            <div class="parent">
                 <h1>Daftar CPU</h1>
                 <h2 id="<?php
                 echo $status == registerStatus::Success ? "success" : "error";
@@ -78,6 +78,9 @@ isset($_POST["daftar_boosted_frequency"])) {
                     default:
                 }
                 ?></h2>
+                <a id="import_file" href="../admin/import_file.php">
+                    Import fail
+                </a>
                 <form class="form" action="daftar.php" method="post" autocomplete="on">
                     <div id="fields">
                         <!-- model, harga, nombor_teras, frekuensi, frekuensi_tertinggi -->
