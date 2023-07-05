@@ -30,7 +30,7 @@ if ($_POST["action"] == 0) {
         $current_record_id++;
     }
 
-    $db->query("INSERT INTO pilihan (id_pilih, id_CPU, user_id) VALUES ({$current_record_id}, {$_POST['cpu']}, {$_POST['user']})");
+    $db->query("INSERT INTO pilihan VALUES ({$current_record_id}, {$_POST['user']}, {$_POST['cpu']})");
     echo "liked";
 }
 // update the interaction count on the cpu
