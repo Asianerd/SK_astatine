@@ -9,9 +9,12 @@
         <?php
 
         if (isset($_COOKIE["login_new"]) && ($_COOKIE["login_new"] <= 0)) {
+            if ($_COOKIE['login_new'] == 0) {
+                echo "<script>alert(\"Berjaya log masuk dengan akaun '{$_COOKIE["login_username"]}'.\")</script>";
+            } else {
+                echo "<script>alert(\"Berjaya daftar masuk akaun baharu '{$_COOKIE["login_username"]}'.\")</script>";
+            }
             setcookie("login_new", 1, time() + (86400 * 14), "/"); // after alert, increment so it doesnt alert again
-            //echo "<script>alert(\"Successfully logged in as {$_COOKIE["login_username"]}.\")</script>";
-            echo "<script>alert(\"Berjaya log masuk dengan akaun {$_COOKIE["login_username"]}.\")</script>";
         }
 
         // require __DIR__ . '/client/CPU.php'; // import cpu class

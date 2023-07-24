@@ -1,6 +1,20 @@
 <?php
 require __DIR__ . '/admin_check.php'; // check if admin
 
+$numberFormatter = new \NumberFormatter(
+    'en_US',
+    \NumberFormatter::PADDING_POSITION
+);
+
+$currencyFormatter = new \NumberFormatter(
+    'en_US',
+    \NumberFormatter::CURRENCY
+);
+
+function formatHZ($hz) {
+    return number_format($hz, 1); // makes string interpolation easier
+}
+
 enum uploadStatus {
     case Unset;
     case Success;
@@ -74,7 +88,7 @@ foreach ($raw_data as $row) {
     }
 
     if ($i["status"] == itemStatus::Success) {
-        if (array_key_exists($row[0], array_map(function($item) {
+        if (in_array(intval($row[0]), array_map(function($item) {
             return $item->id;
         }, Item::$collection))) {
             $i["status"] = itemStatus::OverrideOption;
@@ -83,15 +97,26 @@ foreach ($raw_data as $row) {
         $i["item"] = new Item(
             $row[0],
             $row[1],
-            $row[2],
-            $row[3],
-            $row[4],
-            $row[5],
-            $row[6]
+            floatval($row[2]),
+            floatval($row[3]),
+            floatval($row[4]),
+            floatval($row[5]),
+            floatval($row[6])
         );
     }
 
     array_push($result, $i);
+}
+
+$db = new mysqli($hostname='localhost', $username='astatine', $password='password', $database='astatine_data');
+
+foreach ($result as $item) {
+    if ($item["status"] != itemStatus::Success) {
+        continue;
+    }
+
+    $db->query("INSERT INTO cpu VALUES ({$item['item']->id}, '{$item['item']->name}', {$item['item']->price}, {$item['item']->interaction_count}, {$item['item']->cores}, {$item['item']->frequency}, {$item['item']->boosted_frequency})");
+    //echo "INSERT INTO cpu VALUES ({$item['item']->id}, '{$item['item']->name}', {$item['item']->price}, {$item['item']->interaction_count}, {$item['item']->cores}, {$item['item']->frequency}, {$item['item']->boosted_frequency})";
 }
 
 ?>
@@ -106,12 +131,16 @@ foreach ($raw_data as $row) {
     </head>
     <body>
         <?php include '../prefabs/sidebar.php'; ?>
+        <?php
+        if ($status == uploadStatus::Success) {
+            echo '<script>alert("Berjaya import fail")</script>';
+        }
+        ?>
         <div style="display:flex;justify-content:center;align-items:center;flex-direction:column;">
             <div class="parent">
                 <h1>Import fail</h1>
-                <p style="color:white">
+                <h2>
                     <?php
-                    var_dump($result);
                     switch($status) {
                         case uploadStatus::WrongType:
                             echo "Jenis fail tidak disokong. Sila muat naik fail jenis csv sahaja.";
@@ -122,16 +151,15 @@ foreach ($raw_data as $row) {
                         default:
                     };
                     ?>
-                </p>
+                </h2>
                 <form method="post" class="file-drop" action="import_file.php" enctype="multipart/form-data">
-                <!-- <form method="post" class="file-drop" action="import_file.php" enctype="multipart/form-data" style="display:<?php
-                // echo $status == uploadStatus::Success ? 'none' : 'flex'
-                ?> !important;"> -->
                     <label for="file">
                         <input type="file" name="file" id="file">
                         <div>
                             <img src="/assets/logos/file_upload.png">
                             <div>
+                                <h4>
+                                </h4>
                                 <h3>
                                     Muat naik fail anda
                                 </h3>
@@ -141,10 +169,10 @@ foreach ($raw_data as $row) {
                             </div>
                         </div>
                     </label>
-                    <input type="submit">
+                    <input type="submit" value="Import fail">
                 </form>
             </div>
-            <div class="parent log" style="<?php echo ($status == uploadStatus::Success ? 'display:flex;' : 'display:none;'); ?>">
+            <div class="parent log" id="log" style="<?php echo ($status == uploadStatus::Success ? 'display:flex;' : 'display:none;'); ?>">
                 <h1>
                     Log pengimportan fail
                 </h1>
@@ -168,47 +196,55 @@ foreach ($raw_data as $row) {
                                 continue;
                             }
                             echo "
-                            <tr>
+                            <tr id='instantiated_log_{$item['item']->id}' ".($item['status'] == itemStatus::OverrideOption ? 'class="override_option"' : '').">
                                 <td>{$item['item']->id}</td>
                                 <td>{$item['item']->name}</td>
-                                <td>{$item['item']->price}</td>
-                                <td>{$item['item']->interaction_count}</td>
+                                <td>{$currencyFormatter->formatCurrency($item['item']->price, 'MYR')}</td>
+                                <td>{$numberFormatter->format($item['item']->interaction_count)}</td>
                                 <td>{$item['item']->cores}</td>
-                                <td>{$item['item']->frequency}</td>
-                                <td>{$item['item']->boosted_frequency}</td>
+                                <td>".formatHZ($item['item']->frequency)."</td>
+                                <td>".formatHZ($item['item']->boosted_frequency)."</td>
                                 ".
                                 ($item['status'] == itemStatus::OverrideOption ?
-                                '<td>
+                                "<td id='actions'>
                                     <div>
-                                        <h2>
+                                        <h2 onclick='overwrite({$item['item']->id}, \"{$item['item']->name}\", \"{$item['item']->price}\", \"{$item['item']->interaction_count}\", \"{$item['item']->cores}\", \"{$item['item']->frequency}\", \"{$item['item']->boosted_frequency}\")'>
                                             📝
                                         </h2>
-                                        <h2>
+                                        <h2 onclick='add_new({$item['item']->id}, \"{$item['item']->name}\", \"{$item['item']->price}\", \"{$item['item']->interaction_count}\", \"{$item['item']->cores}\", \"{$item['item']->frequency}\", \"{$item['item']->boosted_frequency}\")'>
                                             ➕
                                         </h2>
-                                        <h2>
+                                        <h2 onclick='dispose({$item['item']->id})'>
                                             ❌
                                         </h2>
                                     </div>
-                                </td>' : '')
+                                </td>" : '')
                                 ."
                             </tr>
                             ";
                         }
                         ?>
-                        <!-- <tr>
-                            <td>id_CPU</td>
-                            <td>model</td>
-                            <td>harga</td>
-                            <td>bilangan_interaksi</td>
-                            <td>nombor_teras</td>
-                            <td>frekuensi</td>
-                            <td>frekuensi_tertinggi</td>
-                        </tr> -->
                     </table>
+                    <div id="all-options">
+                        <h2>
+                            Untuk semua id bercanggah : 
+                        </h2>
+                        <div>
+                            <h2 onclick="overwrite_all()">
+                                📝 Kemas kini dengan data baharu
+                            </h2>
+                            <!-- <h2 onclick="add_new_all()"> removed due to async issues
+                                ➕ Tambah dengan id baharu
+                            </h2> -->
+                            <h2 onclick="dispose_all()">
+                                ❌ Jangan ambil tindakan
+                            </h2>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <script src="/scripts/main_script.js"></script>
+        <script src="/scripts/import_file.js"></script>
     </body>
 </html>

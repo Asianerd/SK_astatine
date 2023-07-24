@@ -8,9 +8,12 @@
         <?php
 
         if (isset($_COOKIE["login_new"]) && ($_COOKIE["login_new"] <= 0)) {
+            if ($_COOKIE['login_new'] == 0) {
+                echo "<script>alert(\"Berjaya log masuk dengan akaun '{$_COOKIE["login_username"]}'.\")</script>";
+            } else {
+                echo "<script>alert(\"Berjaya daftar masuk akaun baharu '{$_COOKIE["login_username"]}'.\")</script>";
+            }
             setcookie("login_new", 1, time() + (86400 * 14), "/"); // after alert, increment so it doesnt alert again
-            //echo "<script>alert(\"Successfully logged in as {$_COOKIE["login_username"]}.\")</script>";
-            echo "<script>alert(\"Berjaya log masuk dengan akaun {$_COOKIE["login_username"]}.\")</script>";
         }
 
         require __DIR__ . '/client/CPU.php'; // import cpu class
@@ -106,19 +109,19 @@
                                 <h3>Keminatan</h3>
                             </label> -->
                             <input type="radio" name="sort-option" id="sort-options-core" value="1">
-                            <label for="sort-options-core">
+                            <label for="sort-options-core" title="Nombor teras">
                                 <img src='/assets/logos/core.png'>
                             </label>
                             <input type="radio" name="sort-option" id="sort-options-frequency" value="2">
-                            <label for="sort-options-frequency">
+                            <label for="sort-options-frequency" title="Frekuensi">
                                 <img src='/assets/logos/frequency.png'>
                             </label>
                             <input type="radio" name="sort-option" id="sort-options-price" value="3">
-                            <label for="sort-options-price">
+                            <label for="sort-options-price" title="Harga">
                                 <img src='/assets/logos/money.png'>
                             </label>
                             <input type="radio" name="sort-option" id="sort-options-liked" value="4">
-                            <label for="sort-options-liked">
+                            <label for="sort-options-liked" title="Nombor pilihan">
                                 <img src='/assets/logos/white_heart.png'>
                             </label>
                         </div>
@@ -141,7 +144,7 @@
                     $cpu_names = [];
 
                     foreach (Item::$collection as $cpu) {
-                        array_push($cpu_names, "\"{$cpu->name}\"");
+                        array_push($cpu_names, "\"Eg: {$cpu->name}\"");
                     }
 
                     shuffle($cpu_names);

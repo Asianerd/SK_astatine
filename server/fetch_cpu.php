@@ -181,4 +181,5 @@ if ($final == "") {
 
 echo "<div class='item-container'>{$final}</div>";
 echo "<h3 id='query-count'>Menunjukkan ". count($siftedCollection) ." daripada {$count} produk.</h3>";
+echo "<h2 id='query-print' onclick='window.print()'>Cetak</h2>";
 ?>

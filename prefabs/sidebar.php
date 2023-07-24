@@ -50,6 +50,10 @@ if (isset($_COOKIE["user_id"])) {
                 ?>
             </div>
             <div>
+                <div id="nav_element" aria-label="hoverable" onclick="colorTheme();onSidebarClick();" style="padding:calc(var(--sidebar-closed-width) * 0.25) !important;">
+                    <img src="/assets/logos/color_wheel.png">
+                    <h1>Tema warna</h1>
+                </div>
                 <a href="/login.php">
                     <div id="nav_element" aria-label="hoverable" onclick="logOut();">
                         <img src="/assets/logos/left_arrow.png">
@@ -64,6 +68,16 @@ if (isset($_COOKIE["user_id"])) {
                         echo "<div id='nav_element'><img src='/assets/logos/{$source}.png'><h1>{$user['nama']}</h1></div>";
                     }
                 ?>
+            </div>
+        </div>
+    </div>
+    <div id="customize-menu_parent" style="display:none;justify-content:center;align-items:center;height:100vh;background:#0005;">
+        <div class="customize-menu">
+            <h1>Tema warna</h1>
+            <div id="theme-container">
+            </div>
+            <div id="close-container">
+                <h6 onclick="colorTheme()">Close</h6>
             </div>
         </div>
     </div>

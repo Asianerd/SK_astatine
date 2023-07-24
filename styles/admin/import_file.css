@@ -57,6 +57,14 @@
     transition-duration: 0.3s;
 }
 
+.file-drop label[for="file"] > div h4 {
+    font-weight: bold;
+    font-style:normal;
+    font-size:1.5em;
+
+    margin:0.2em 0 0.2em 0;
+}
+
 .file-drop label[for="file"] > div h3 {
     font-weight: normal;
     font-style: italic;
@@ -94,6 +102,13 @@
     margin-top:25vh;
 }
 
+.parent h2 {
+    color:red;
+    font-style:italic;
+    font-weight: normal;
+    font-size: 1.2em;
+}
+
 .log {
     min-width: 0;
 
@@ -104,6 +119,13 @@
     height:fit-content !important;
 
     transition-duration:0.3s;
+}
+
+.log > div {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .log h1 {
@@ -173,4 +195,50 @@
 .log td > div h2:hover {
     transform:translateY(-0.3em);
 }
+
+.log #all-options {
+    display:flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    margin-top:2em;
+
+    width:100%;
+}
+
+.log #all-options > h2 {
+    margin-right:2ch;
+}
+
+.log #all-options div h2 {
+    text-align: left;
+
+    padding: 1ch 1em;
+
+    font-size:17px;
+    font-weight: bold;
+    font-style:normal;
+
+    border-radius:1000px;
+
+    background: var(--background-tertiary);
+
+    transition-duration:0.3s;
+
+    cursor:pointer;
+}
+
+.log #all-options div h2:hover {
+    transform:translateY(-10%);
+}
 /* #endregion */
+
+.override_option > td:first-child {
+    background:red;
+}
+
+.added_new > td:first-child {
+    background:green;
+}
+
+

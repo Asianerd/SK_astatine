@@ -77,7 +77,7 @@ if (isset($_POST["signup_name"]) &&
 
 if ($status == signupStatus::Success) {
     // sets cookies with 1 day expiry
-    setcookie("login_new", 0, time() + (86400 * 14), "/"); // index.php displays alert box if this is 0
+    setcookie("login_new", -1, time() + (86400 * 14), "/"); // index.php displays alert box if this is 0
     setcookie("login_username", $_POST["signup_username"], time() + (86400 * 14), "/");
     setcookie("user_id", $current_user_id, time() + (86400 * 14), "/");
     header("Location: ./index.php");
