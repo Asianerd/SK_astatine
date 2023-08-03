@@ -109,6 +109,9 @@ function colorTheme() {
 }
 
 function colorThemeUpdate() {
+    if (fetchCookie('color_theme_index') === undefined) {
+        return;
+    }
     for (const [key, value] of Object.entries(colorThemes[parseInt(fetchCookie('color_theme_index'))]["palette"])) {
         root.style.setProperty(`--background-${key}`, `#${value}`);
     };
