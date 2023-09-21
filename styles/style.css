@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Lato:ital,wght@0,300;1,100&family=Open+Sans:ital,wght@0,300;0,400;1,300&family=PT+Serif:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+Pro:wght@200;300&family=Ubuntu:ital,wght@0,300;1,300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,600;1,700&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Julius+Sans+One&family=Lato:ital,wght@0,300;1,100&family=Open+Sans:ital,wght@0,300;0,400;1,300&family=PT+Serif:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Source+Sans+Pro:wght@200;300&family=Ubuntu:ital,wght@0,300;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,300;0,400;0,500;0,600;0,700;1,600;1,700&display=swap'); */
 /* 
 Julius Sans One
 Lato
@@ -10,6 +10,36 @@ Playfair Display
 Source Sans Pro
 Ubuntu
 */
+
+/*
+nunito
+open sans
+ */
+
+/* #region font faces */
+@font-face {
+    font-family: 'Nunito';
+    src: url('./fonts/Nunito/Nunito-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: 'Nunito';
+    src: url('./fonts/Nunito/Nunito-Italic-VariableFont_wght.ttf');
+    font-style:italic;
+}
+
+
+@font-face {
+    font-family: 'Open Sans';
+    src:url('./fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf');
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src:url('./fonts/Open_Sans/OpenSans-Italic-VariableFont_wdth\,wght.ttf');
+    font-style:italic;
+}
+/* #endregion */
 
 :root {
     /* #region Entity */
@@ -400,7 +430,7 @@ h1, h2, h3, h4, h5, h6 {
 
     color:#999;
     font-size: medium;
-    font-weight:light;
+    font-weight:lighter;
     font-style:italic;
 }
 
