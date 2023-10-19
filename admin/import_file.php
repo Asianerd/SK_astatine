@@ -208,13 +208,13 @@ foreach ($result as $item) {
                                 ($item['status'] == itemStatus::OverrideOption ?
                                 "<td id='actions'>
                                     <div>
-                                        <h2 onclick='overwrite({$item['item']->id}, \"{$item['item']->name}\", \"{$item['item']->price}\", \"{$item['item']->interaction_count}\", \"{$item['item']->cores}\", \"{$item['item']->frequency}\", \"{$item['item']->boosted_frequency}\")'>
+                                        <h2 title='Kemas kini' onclick='overwrite({$item['item']->id}, \"{$item['item']->name}\", \"{$item['item']->price}\", \"{$item['item']->interaction_count}\", \"{$item['item']->cores}\", \"{$item['item']->frequency}\", \"{$item['item']->boosted_frequency}\")'>
                                             📝
                                         </h2>
-                                        <h2 onclick='add_new({$item['item']->id}, \"{$item['item']->name}\", \"{$item['item']->price}\", \"{$item['item']->interaction_count}\", \"{$item['item']->cores}\", \"{$item['item']->frequency}\", \"{$item['item']->boosted_frequency}\")'>
+                                        <h2 title='Tambah sebagai baharu' onclick='add_new({$item['item']->id}, \"{$item['item']->name}\", \"{$item['item']->price}\", \"{$item['item']->interaction_count}\", \"{$item['item']->cores}\", \"{$item['item']->frequency}\", \"{$item['item']->boosted_frequency}\")'>
                                             ➕
                                         </h2>
-                                        <h2 onclick='dispose({$item['item']->id})'>
+                                        <h2 title='Abaikan' onclick='dispose({$item['item']->id})'>
                                             ❌
                                         </h2>
                                     </div>
