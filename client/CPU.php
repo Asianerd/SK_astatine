@@ -3,9 +3,9 @@
 class Item {
     // #region Statics
     public static $COLUMN_COUNT = 7;
-    public static array $collection; // holds all cpu items
-    public static array $slider_ranges;
-    static array $data_ranges;
+    public static $collection; // holds all cpu items
+    public static $slider_ranges;
+    static $data_ranges;
 
     public static function initialize() {
         Item::$collection = array();
@@ -21,7 +21,7 @@ class Item {
         // connect to database
         $db = new mysqli($hostname='localhost', $username='astatine', $password='password', $database='astatine_data');
         
-        // loop through every cpu in database
+        // populate $collection with all records from db
         foreach($db->query('SELECT * FROM `cpu`') as $row) {
             // add to $collection
             array_push(Item::$collection, Item::from_dict($row));
@@ -29,8 +29,6 @@ class Item {
 
         foreach(Item::$collection as $cpu) {
             // loop through every cpu
-            // var_dump($cpu);
-            // echo "\n\n";
             foreach (array_keys(Item::$data_ranges) as $key) {
                 // loops through each key in associative array
                 // reads first element (start)
