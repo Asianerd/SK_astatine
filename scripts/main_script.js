@@ -124,6 +124,9 @@ function colorThemeChange(index) {
 
 function initializeColorThemes() {
     var themeContainer = document.querySelector(".customize-menu #theme-container");
+    if (themeContainer == null) {
+        return;
+    }
     themeContainer.innerHTML = "";
     var i = 0;
     colorThemes.forEach(element => {
