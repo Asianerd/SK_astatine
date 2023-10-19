@@ -9,8 +9,10 @@
 
         if (isset($_COOKIE["login_new"]) && ($_COOKIE["login_new"] <= 0)) {
             if ($_COOKIE['login_new'] == 0) {
+                // display log in message
                 echo "<script>alert(\"Berjaya log masuk dengan akaun '{$_COOKIE["login_username"]}'.\")</script>";
             } else {
+                // display sign up message
                 echo "<script>alert(\"Berjaya daftar masuk akaun baharu '{$_COOKIE["login_username"]}'.\")</script>";
             }
             setcookie("login_new", 1, time() + (86400 * 14), "/"); // after alert, increment so it doesnt alert again
@@ -24,12 +26,8 @@
         ?>
     </head>
     <body>
-        <!-- <div id="prefab_header"></div> -->
         <?php include './prefabs/sidebar.php'; ?>
-        <!-- <div id="prefab_login_popup" aria-label="inactive"></div> -->
         <?php include './prefabs/login_popup.html'; ?>
-        <!-- <img src="/assets/outrun.gif" id="background-image"> -->
-        <!-- <div id="prefab_item_filter"></div> -->
         <div id="content-parent">
             <div class="item-filter">
                 <div id="input">
@@ -92,22 +90,6 @@
                     </h1>
                     <div id="sort-options">
                         <div id="sort-types">
-                            <!-- <input type="radio" name="sort-option" id="sort-options-core" value="1">
-                            <label for="sort-options-core">
-                                <h3>Teras</h3>
-                            </label>
-                            <input type="radio" name="sort-option" id="sort-options-frequency" value="2">
-                            <label for="sort-options-frequency">
-                                <h3>Frekuensi</h3>
-                            </label>
-                            <input type="radio" name="sort-option" id="sort-options-price" value="3">
-                            <label for="sort-options-price">
-                                <h3>Harga</h3>
-                            </label> -->
-                            <!-- <input type="radio" name="sort-option" id="sort-options-price" value="4">
-                            <label for="sort-options-likes">
-                                <h3>Keminatan</h3>
-                            </label> -->
                             <input type="radio" name="sort-option" id="sort-options-core" value="1">
                             <label for="sort-options-core" title="Nombor teras">
                                 <img src='/assets/logos/core.png'>
@@ -142,13 +124,17 @@
                     <hr>
                     <input class="typing-effect" data-period="2000" data-rotate='<?php 
                     $cpu_names = [];
+                    // empty array
 
                     foreach (Item::$collection as $cpu) {
+                        // push the names of all cpus into the array
                         array_push($cpu_names, "\"Eg: {$cpu->name}\"");
                     }
 
+                    // randomize the arrangement
                     shuffle($cpu_names);
 
+                    // turn the list into a string parseable by js
                     echo '['.implode(',', $cpu_names).']';
                     ?>' type="text">
                 </div>

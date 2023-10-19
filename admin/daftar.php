@@ -9,7 +9,7 @@ enum registerStatus {
     case FieldNotSet;
 }
 
-$status = registerStatus::Unset;
+$status = registerStatus::Unset; // set status to unset first
 
 if (isset($_POST["daftar_name"]) &&
     isset($_POST["daftar_price"]) &&
@@ -17,8 +17,9 @@ if (isset($_POST["daftar_name"]) &&
     isset($_POST["daftar_frequency"]) &&
 isset($_POST["daftar_boosted_frequency"])) {
     $db = new mysqli($hostname='localhost', $username='astatine', $password='password', $database='astatine_data');
-    $query = $db->query("SELECT * FROM `cpu` WHERE model = '{$_POST['daftar_name']}'");
+    $query = $db->query("SELECT * FROM `cpu` WHERE model = '{$_POST['daftar_name']}'"); // select all models with same name
     if ($query->num_rows == 0) {
+        // if no model exists, proceed
 
         // this algorithm is explained in signup.php
         $current_cpu_id = 0;
@@ -38,13 +39,10 @@ isset($_POST["daftar_boosted_frequency"])) {
 
         $db->query("INSERT INTO `cpu` (id_CPU, model, harga, bilangan_interaksi, nombor_teras, frekuensi, frekuensi_tertinggi)
             VALUES ({$current_cpu_id}, \"{$_POST["daftar_name"]}\", \"{$_POST["daftar_price"]}\", 0, \"{$_POST["daftar_cores"]}\", \"{$_POST["daftar_frequency"]}\", \"{$_POST["daftar_boosted_frequency"]}\")");
+        // insert new cpu model into db and set status
         $status = registerStatus::Success;
-        // unset($_POST["daftar_name"]);
-        // unset($_POST["daftar_price"]);
-        // unset($_POST["daftar_cores"]);
-        // unset($_POST["daftar_frequency"]);
-        // unset($_POST["daftar_boosted_frequency"]);
     } else {
+        // model exists, set status
         $status = registerStatus::ModelExists;
     }
 } else {
@@ -65,6 +63,7 @@ isset($_POST["daftar_boosted_frequency"])) {
         <div style="height:100vh;width:100vw;margin:0;padding:0;display:flex;justify-content:center;align-items:center;">
             <div class="parent">
                 <h1>Daftar CPU</h1>
+                <!-- this h2 is invisible when status is succesful -->
                 <h2 id="<?php
                 echo $status == registerStatus::Success ? "success" : "error";
                 ?>"><?php

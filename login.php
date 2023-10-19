@@ -15,15 +15,17 @@ $status = loginStatus::Unset;
 if (isset($_POST["login_username"]) && isset($_POST["login_password"])) {
     // if username and password arent null
     $user_db = new mysqli($hostname='localhost', $username='astatine', $password='password', $database='astatine_data'); // login to database
-    $result = $user_db->query("SELECT * FROM `pelanggan` WHERE username = '{$_POST["login_username"]}'"); // query data
+    $result = $user_db->query("SELECT * FROM `pelanggan` WHERE username = '{$_POST["login_username"]}'"); // get all records with matching username
     if ($result->num_rows >= 1) {
         // if more than one record exists
         foreach ($result as $x) {
             $user = $x;
             break;
-            // yea, dumb, but faster way to fetch first element
+            // fetch first element
         }
         $status = $user['kata_laluan'] == $_POST["login_password"] ? loginStatus::Success : loginStatus::IncorrectPassword;
+        // loginStatus = Success if password is correct
+        // loginStatus = IncorrectPassword if password is wrong
     } else {
         // no record exists
         $status = loginStatus::UsernameNotFound;
@@ -31,7 +33,7 @@ if (isset($_POST["login_username"]) && isset($_POST["login_password"])) {
 }
 
 if ($status == loginStatus::Success) {
-    // sets cookies with 1 day expiry
+    // sets cookies with 14 day expiry
     setcookie("login_new", 0, time() + (86400 * 14), "/"); // index.php displays alert box if this is 0
     setcookie("login_username", $user['username'], time() + (86400 * 14), "/");
     setcookie("user_id", $user['user_id'], time() + (86400 * 14), "/");

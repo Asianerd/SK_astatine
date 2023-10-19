@@ -17,11 +17,6 @@
             setcookie("login_new", 1, time() + (86400 * 14), "/"); // after alert, increment so it doesnt alert again
         }
 
-        // require __DIR__ . '/client/CPU.php'; // import cpu class
-
-        // Item::initialize();
-        // initialized twice, once here and another in fetch_cpu but thats fine
-
         ?>
     </head>
     <body>

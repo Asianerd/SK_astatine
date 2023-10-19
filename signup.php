@@ -17,7 +17,7 @@ if (isset($_POST["signup_name"]) &&
     isset($_POST["signup_confirm_password"])) {
     // if name, username, password and confirm password arent null
     $user_db = new mysqli($hostname='localhost', $username='astatine', $password='password', $database='astatine_data'); // login to database
-    $result = $user_db->query("SELECT * FROM `pelanggan` WHERE username = '{$_POST["signup_username"]}'"); // querys data
+    $result = $user_db->query("SELECT * FROM `pelanggan` WHERE username = '{$_POST["signup_username"]}'"); // find all users with the same username
 
     if ($result->num_rows >= 1) {
         // if more than one record exists
@@ -30,10 +30,10 @@ if (isset($_POST["signup_name"]) &&
          * 
          * situation 1:
          *  current_user_id, user_id
-         *  1, 1
-         *  2, 2
-         *  3, 3
-         *  4, 5 -> if both values arent the same, that means one user_id is missing
+        *  1, 1
+        *  2, 2
+        *  3, 3
+        *  4, 5 -> if both values arent the same, that means one user_id is missing
          *  
          *  found = true
          * if !found, so nothing happens
@@ -76,7 +76,7 @@ if (isset($_POST["signup_name"]) &&
 }
 
 if ($status == signupStatus::Success) {
-    // sets cookies with 1 day expiry
+    // sets cookies with 14 day expiry
     setcookie("login_new", -1, time() + (86400 * 14), "/"); // index.php displays alert box if this is 0
     setcookie("login_username", $_POST["signup_username"], time() + (86400 * 14), "/");
     setcookie("user_id", $current_user_id, time() + (86400 * 14), "/");

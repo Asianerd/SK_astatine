@@ -5,6 +5,7 @@ if (!(isset($_POST["user"]) && isset($_POST["cpu"]) && isset($_POST["action"])))
 }
 
 $db = new mysqli($hostname='localhost', $username='astatine', $password='password', $database='astatine_data');
+// log into db
 
 // 0 -> unlike
 // 1 -> like
@@ -36,6 +37,7 @@ if ($_POST["action"] == 0) {
 // update the interaction count on the cpu
 $likes = 0;
 foreach ($db->query("SELECT COUNT(user_id) FROM pilihan WHERE id_CPU = {$_POST['cpu']}") as $element) {
+    // set $likes to the amount of counts of user_id of the id_CPU = {id} query
     $likes = $element['COUNT(user_id)'];
 }
 echo $db->query("UPDATE cpu SET bilangan_interaksi = {$likes} WHERE id_CPU = {$_POST['cpu']}");
